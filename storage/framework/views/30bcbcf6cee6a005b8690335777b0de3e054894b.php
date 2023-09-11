@@ -8,11 +8,11 @@
         <div style="width: 50%"></div>
     </div>
     <div style="background: #f4f5f5;box-sizing: border-box;padding: 15px;border-top:1px solid #dedede;border-bottom: 1px solid #dedede">
-        <p>Bạn có một yêu cầu thay đổi mật khẩu <a href="{{ $link }}" >click vào đây</a> để truy cập đường dẫn thay đổi mật khẩu.</p>
+        <p>Bạn có một yêu cầu thay đổi mật khẩu <a href="<?php echo e($link); ?>" >click vào đây</a> để truy cập đường dẫn thay đổi mật khẩu.</p>
         <p><i>Chú ý</i> :  Đường dẫn sẽ bị xoá sau 3 phút</p>
     </div>
     <div style="background: #f4f5f5;box-sizing: border-box;padding: 15px">
         <p style="margin:2px 0;color: #333">Email : admin@gmail.com</p>
         <p style="margin:2px 0;color: #333">Phone : 0383030255</p>
     </div>
-</div>
+</div><?php /**PATH D:\ADMIN\web_ban_giay_L9\web_ban_giay_Hapi2hand_Finally\resources\views/emails/reset_password.blade.php ENDPATH**/ ?>

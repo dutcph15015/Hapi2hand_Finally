@@ -47,7 +47,7 @@
             <!--Thay đổi-->
             <div class="logo">
                 <a href="/" class="desktop">
-                    <img src="{{ url('images/logo.png') }}" style="height: 50px;" alt="Home">
+                    <img srcset="{{ url('images/logo_hap2handdd-removebg-preview.png') }} 2x" style="height: 60px; width:100" alt="Home">
                 </a>
 {{--                <a href="/" class="mobile">--}}
 {{--                    <img src="{{ url('images/icon/LogoMobile.png') }}" alt="Home">--}}
@@ -75,11 +75,11 @@
                     </a>
                 </li>
                 <li class="desktop">
-                    <a href="tel:18006005" title="">
+                    <a href="tel:0559518488" title="">
                         <i class="la la-phone"></i>
                         <span class="text">
                             <span class="">Hotline</span>
-                            <span>1800.6005</span>
+                            <span>0559518488</span>
                         </span>
                     </a>
                 </li>

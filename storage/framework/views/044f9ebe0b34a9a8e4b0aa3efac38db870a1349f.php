@@ -1,8 +1,7 @@
-@extends('layouts.app_master_frontend')
-@section('css')
-    <link rel="stylesheet" href="{{ asset('css/cart.min.css') }}">
-@stop
-@section('content')
+<?php $__env->startSection('css'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('css/cart.min.css')); ?>">
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="container cart">
         <div class="left">
             <div class="list">
@@ -19,61 +18,64 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach($shopping as $key => $item)
+                            <?php $__currentLoopData = $shopping; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <td>
-                                        <a href="{{ route('get.product.detail',\Str::slug($item->name).'-'.$item->id) }}"
-                                            title="{{ $item->name }}" class="avatar image contain">
-                                            <img alt="" src="{{ pare_url_file($item->options->image) }}" class="lazyload">
+                                        <a href="<?php echo e(route('get.product.detail',\Str::slug($item->name).'-'.$item->id)); ?>"
+                                            title="<?php echo e($item->name); ?>" class="avatar image contain">
+                                            <img alt="" src="<?php echo e(pare_url_file($item->options->image)); ?>" class="lazyload">
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('get.product.detail',\Str::slug($item->name).'-'.$item->id) }}"><strong>{{ $item->name }}</strong></a>
+                                        <a href="<?php echo e(route('get.product.detail',\Str::slug($item->name).'-'.$item->id)); ?>"><strong><?php echo e($item->name); ?></strong></a>
                                         <p style="font-size: 13px;font-weight: 600;">
-                                            @if ($item->options->size)
-                                                Size : {{ $item->options->size }}
-                                            @endif
+                                            <?php if($item->options->size): ?>
+                                                Size : <?php echo e($item->options->size); ?>
+
+                                            <?php endif; ?>
                                         </p>
                                         <p style="font-size: 13px;font-weight: 600;">
-                                            @if ($item->options->color)
-                                                Color : {{ $item->options->color }}
-                                            @endif
+                                            <?php if($item->options->color): ?>
+                                                Color : <?php echo e($item->options->color); ?>
+
+                                            <?php endif; ?>
                                         </p>
                                         <p style="font-size: 13px;font-weight: 600;">
-                                            @if ($item->options->gender)
-                                                Gender : {{ $item->options->gender == 1 ? 'Nam' : 'Nữ' }}
-                                            @endif
+                                            <?php if($item->options->gender): ?>
+                                                Gender : <?php echo e($item->options->gender == 1 ? 'Nam' : 'Nữ'); ?>
+
+                                            <?php endif; ?>
                                         </p>
                                     </td>
 
                                     <td>
-                                        <p><b>{{  number_format($item->price,0,',','.') }} đ</b></p>
+                                        <p><b><?php echo e(number_format($item->price,0,',','.')); ?> đ</b></p>
                                         <p>
 
-                                            @if ($item->options->price_old)
-                                                <span style="text-decoration: line-through;">{{  number_format(number_price($item->options->price_old),0,',','.') }} đ</span>
-                                                <span class="sale">- {{ $item->options->sale }} %</span>
-                                            @endif
+                                            <?php if($item->options->price_old): ?>
+                                                <span style="text-decoration: line-through;"><?php echo e(number_format(number_price($item->options->price_old),0,',','.')); ?> đ</span>
+                                                <span class="sale">- <?php echo e($item->options->sale); ?> %</span>
+                                            <?php endif; ?>
                                         </p>
                                     </td>
                                     <td>
                                         <div class="qty_number">
-                                            <input type="number"  min="1" class="input_quantity" name="quantity_14692" value="{{  $item->qty }}" id="">
-                                            <p data-price="{{ $item->price }}" data-url="{{  route('ajax_get.shopping.update', $key) }}" data-id-product="{{  $item->id }}">
+                                            <input type="number"  min="1" class="input_quantity" name="quantity_14692" value="<?php echo e($item->qty); ?>" id="">
+                                            <p data-price="<?php echo e($item->price); ?>" data-url="<?php echo e(route('ajax_get.shopping.update', $key)); ?>" data-id-product="<?php echo e($item->id); ?>">
                                                 <span class="js-increase">+</span>
                                                 <span class="js-reduction">-</span>
                                             </p>
-                                            <a href="{{  route('get.shopping.delete', $key) }}" class="js-delete-item btn-action-delete"><i class="la la-trash"></i></a>
+                                            <a href="<?php echo e(route('get.shopping.delete', $key)); ?>" class="js-delete-item btn-action-delete"><i class="la la-trash"></i></a>
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="js-total-item">{{ number_format($item->price * $item->qty,0,',','.') }} đ</span>
+                                        <span class="js-total-item"><?php echo e(number_format($item->price * $item->qty,0,',','.')); ?> đ</span>
                                     </td>
                                 </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
-                    <p style="float: right;margin-top: 20px;" class="total_cart">Tổng tiền : <b id="sub-total">{{ \Cart::subtotal(0) }} đ</b></p>
+                    <p style="float: right;margin-top: 20px;" class="total_cart">Tổng tiền : <b id="sub-total"><?php echo e(\Cart::subtotal(0)); ?> đ</b></p>
                 </div>
             </div>
         </div>
@@ -81,26 +83,26 @@
             <div class="customer">
                 <div class="title">THÔNG TIN ĐẶT HÀNG</div>
                 <div class="customer__content">
-                    <form class="from_cart_register" action="{{ route('post.shopping.pay') }}" method="post">
-                        @csrf
+                    <form class="from_cart_register" action="<?php echo e(route('post.shopping.pay')); ?>" method="post">
+                        <?php echo csrf_field(); ?>
                         <div class="form-group">
                             <label for="name" >Họ và tên <span class="cRed">(*)</span></label>
-                            <input name="tst_name" id="name" required="" value="{{ get_data_user('web','name') }}" type="text" class="form-control" 
+                            <input name="tst_name" id="name" required="" value="<?php echo e(get_data_user('web','name')); ?>" type="text" class="form-control" 
                               oninvalid="this.setCustomValidity('Vui lòng nhập tên')" oninput="setCustomValidity('')">
                         </div>
                         <div class="form-group">
                             <label for="phone">Điện thoại <span class="cRed">(*)</span></label>
-                            <input name="tst_phone" id="phone" required="" value="{{ get_data_user('web','phone') }}" type="text" class="form-control"
+                            <input name="tst_phone" id="phone" required="" value="<?php echo e(get_data_user('web','phone')); ?>" type="text" class="form-control"
                               oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại')" oninput="setCustomValidity('')">
                         </div>
                         <div class="form-group">
                             <label for="address">Địa chỉ <span class="cRed">(*)</span></label>
-                            <input name="tst_address" id="address" required="" value="{{ get_data_user('web','address') }}" type="text" class="form-control"
+                            <input name="tst_address" id="address" required="" value="<?php echo e(get_data_user('web','address')); ?>" type="text" class="form-control"
                                 oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ')" oninput="setCustomValidity('')">
                         </div>
                         <div class="form-group">
                             <label for="email">Email <span class="cRed">(*)</span></label>
-                            <input name="tst_email" id="email" required="" value="{{ get_data_user('web','email') }}" type="text" value="" class="form-control"
+                            <input name="tst_email" id="email" required="" value="<?php echo e(get_data_user('web','email')); ?>" type="text" value="" class="form-control"
                                 oninvalid="this.setCustomValidity('Vui lòng nhập Email')" oninput="setCustomValidity('')">
                         </div>
                         <div class="form-group">
@@ -121,10 +123,10 @@
                             </div>
                         </div>
                         <div class="btn-buy">
-                            <button class="buy1 btn btn-purple {{ \Auth::id() ? '' : 'js-show-login' }}" type="submit">
+                            <button class="buy1 btn btn-purple <?php echo e(\Auth::id() ? '' : 'js-show-login'); ?>" type="submit">
                                 Thanh toán khi nhận hàng
                             </button>
-                            <button class="btn btn-purple {{ \Auth::id() ? '' : 'js-show-login' }}" name="payment" value="2" type="submit">
+                            <button class="btn btn-purple <?php echo e(\Auth::id() ? '' : 'js-show-login'); ?>" name="payment" value="2" type="submit">
                                 <span class="">Thanh toán online</span>
                             </button>
                         </div>
@@ -133,9 +135,9 @@
             </div>
         </div>
     </div>
-@stop
-@section('script')
-    <script src="{{ asset('js/cart.js') }}" type="text/javascript"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(asset('js/cart.js')); ?>" type="text/javascript"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://codeseven.github.io/toastr/build/toastr.min.js"></script>
     <script type="text/javascript">
@@ -221,7 +223,7 @@
 				});
 			})
             $('.btn-cart-discount').click(function () {
-                let URL = '{{ route('ajax_get.update.cart.discount') }}';
+                let URL = '<?php echo e(route('ajax_get.update.cart.discount')); ?>';
                 let discount_code = $('.discount_code').val();
 
                 $.ajax({
@@ -242,4 +244,6 @@
             })
         })
     </script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app_master_frontend', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\ADMIN\web_ban_giay_L9\web_ban_giay_Hapi2hand_Finally\resources\views/frontend/pages/shopping/index.blade.php ENDPATH**/ ?>
