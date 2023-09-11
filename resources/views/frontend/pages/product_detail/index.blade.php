@@ -161,7 +161,7 @@
                                 {{--<a href=""><i class="la la-camera"></i> Gửi ảnh</a>--}}
                                 <a href="#">Quy định đăng bình luận</a>
                             </p>
-                            <button type="submit" class=" {{ \Auth::id() ? 'js-save-comment' : 'js-show-login' }}">Gửi bình luận</button>
+                            <button type="su" class=" {{ \Auth::id() ? 'js-save-comment' : 'js-show-login' }}">Gửi bình luận</button>
                         </div>
                     </form>
                 </div>

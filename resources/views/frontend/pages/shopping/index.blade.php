@@ -96,7 +96,7 @@
                         <div class="form-group">
                             <label for="address">Địa chỉ <span class="cRed">(*)</span></label>
                             <input name="tst_address" id="address" required="" value="{{ get_data_user('web','address') }}" type="text" class="form-control"
-                                oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ')" oninput="setCustomValidity('')">
+                                oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ')" oninput="setCustomValidity('')" placeholder="Số nhà, Đường, Phường (Xã), Quận (Huyện), Tỉnh (TP)">
                         </div>
                         <div class="form-group">
                             <label for="email">Email <span class="cRed">(*)</span></label>
