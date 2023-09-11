@@ -160,7 +160,7 @@
                                 
                                 <a href="#">Quy định đăng bình luận</a>
                             </p>
-                            <button type="su" class=" <?php echo e(\Auth::id() ? 'js-save-comment' : 'js-show-login'); ?>">Gửi bình luận</button>
+                            <button type="submit" class=" <?php echo e(\Auth::id() ? 'js-save-comment' : 'js-show-login'); ?>">Gửi bình luận</button>
                         </div>
                     </form>
                 </div>
