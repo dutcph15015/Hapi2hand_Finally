@@ -1,5 +1,5 @@
-@extends('layouts.app_master_admin')
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>Trang quản trị hệ thống website xây dựng website bán hàng</h1>
@@ -15,7 +15,7 @@
                     <span class="info-box-icon bg-aqua"><i class="ion ion-ios-cart-outline"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Tổng số đơn hàng</span>
-                        <span class="info-box-number">{{  $totalTransactions }}<small><a href="{{  route('admin.transaction.index') }}">(Chi tiết)</a></small></span>
+                        <span class="info-box-number"><?php echo e($totalTransactions); ?><small><a href="<?php echo e(route('admin.transaction.index')); ?>">(Chi tiết)</a></small></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -27,7 +27,7 @@
                     <span class="info-box-icon bg-red"><i class="ion ion-ios-people-outline"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Thành viên</span>
-                        <span class="info-box-number">{{ $totalUsers }} <small><a href="{{ route('admin.user.index') }}">(Chi tiết)</a></small></span>
+                        <span class="info-box-number"><?php echo e($totalUsers); ?> <small><a href="<?php echo e(route('admin.user.index')); ?>">(Chi tiết)</a></small></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -41,7 +41,7 @@
                     <span class="info-box-icon bg-green"><i class="ion ion-ios-gear-outline"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Sản phẩm</span>
-                        <span class="info-box-number">{{  $totalProducts }} <small><a href="{{ route('admin.product.index') }}">(Chi tiết)</a></small></span>
+                        <span class="info-box-number"><?php echo e($totalProducts); ?> <small><a href="<?php echo e(route('admin.product.index')); ?>">(Chi tiết)</a></small></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -53,7 +53,7 @@
                     <span class="info-box-icon bg-yellow"><i class="fa fa-google-plus"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Đánh giá</span>
-                        <span class="info-box-number">{{ $totalRatings }} <small><a href="{{ route('admin.rating.index') }}">(Chi tiết)</a></small></span>
+                        <span class="info-box-number"><?php echo e($totalRatings); ?> <small><a href="<?php echo e(route('admin.rating.index')); ?>">(Chi tiết)</a></small></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -64,9 +64,9 @@
         <div class="box-title" style="margin-bottom:15px">
             <form class="form-inline">
                 <label for="start_date" style="margin-right:5px">Từ</label>
-                <input id="start_date" class="form-control" type="date" name="start_date" value="{{ Request::get('start_date') }}"/>
+                <input id="start_date" class="form-control" type="date" name="start_date" value="<?php echo e(Request::get('start_date')); ?>"/>
                 <label for="end_date" style="margin:0 5px">Đến</label>
-                <input id="end_date" class="form-control" type="date" name="end_date" value="{{ Request::get('end_date') }}"/>
+                <input id="end_date" class="form-control" type="date" name="end_date" value="<?php echo e(Request::get('end_date')); ?>"/>
                 <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Tìm kiếm</button>
             </form>
         </div>
@@ -75,7 +75,7 @@
     <div class="row" style="margin-bottom: 15px;">
         <div class="col-sm-8">
             <figure class="highcharts-figure">
-                <div id="container2" data-list-day="{{ $listDay }}" data-money-default={{ $arrRevenueTransactionMonthDefault }} data-money={{ $arrRevenueTransactionMonth }}>
+                <div id="container2" data-list-day="<?php echo e($listDay); ?>" data-money-default=<?php echo e($arrRevenueTransactionMonthDefault); ?> data-money=<?php echo e($arrRevenueTransactionMonth); ?>>
 
                     
                 </div>
@@ -83,7 +83,7 @@
         </div>
         <div class="col-sm-4">
             <figure class="highcharts-figure">
-                <div id="container" data-json="{{ $statusTransaction }}"></div>
+                <div id="container" data-json="<?php echo e($statusTransaction); ?>"></div>
             </figure>
         </div>
     </div>
@@ -94,7 +94,7 @@
             <!-- TABLE: LATEST ORDERS -->
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Danh sách đơn hàng {{ !!sizeof($transactions) ? '('.sizeof($transactions).' đơn hàng)' : '' }}</h3>
+                    <h3 class="box-title">Danh sách đơn hàng <?php echo e(!!sizeof($transactions) ? '('.sizeof($transactions).' đơn hàng)' : ''); ?></h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                         </button>
@@ -116,37 +116,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (!sizeof($transactions))
+                                <?php if(!sizeof($transactions)): ?>
                                     <tr>
                                         <td colspan="6" style="text-align:center;padding: 20px">Không có đơn hàng nào</div>
                                     </tr>
-                                @endif
-                                @foreach($transactions as $transaction)
+                                <?php endif; ?>
+                                <?php $__currentLoopData = $transactions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transaction): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td>{{ $transaction->id }}</td>
+                                        <td><?php echo e($transaction->id); ?></td>
                                         <td>
                                             <ul>
-                                                <li>Name: {{ $transaction->tst_name }}</li>
-                                                <li>Email: {{ $transaction->tst_email }}</li>
-                                                <li>Phone: {{ $transaction->tst_phone }}</li>
+                                                <li>Name: <?php echo e($transaction->tst_name); ?></li>
+                                                <li>Email: <?php echo e($transaction->tst_email); ?></li>
+                                                <li>Phone: <?php echo e($transaction->tst_phone); ?></li>
                                             </ul>
                                         </td>
-                                        <td>{{ number_format($transaction->tst_total_money,0,',','.') }} đ</td>
+                                        <td><?php echo e(number_format($transaction->tst_total_money,0,',','.')); ?> đ</td>
                                         <td>
-                                            @if ($transaction->tst_user_id)
+                                            <?php if($transaction->tst_user_id): ?>
                                                 <span class="label label-success">Thành viên</span>
-                                            @else
+                                            <?php else: ?>
                                                 <span class="label label-default">Khách</span>
-                                            @endif
+                                            <?php endif; ?>
                                         </td>
                                         <td>
-                                            <span class="label label-{{ $transaction->getStatus($transaction->tst_status)['class'] }}">
-                                                {{ $transaction->getStatus($transaction->tst_status)['name'] }}
+                                            <span class="label label-<?php echo e($transaction->getStatus($transaction->tst_status)['class']); ?>">
+                                                <?php echo e($transaction->getStatus($transaction->tst_status)['name']); ?>
+
                                             </span>
                                         </td>
-                                        <td>{{  $transaction->created_at }}</td>
+                                        <td><?php echo e($transaction->created_at); ?></td>
                                     </tr>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                         </table>
                     </div>
@@ -154,7 +155,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <a href="{{ route('admin.transaction.index') }}" class="btn btn-sm btn-info btn-flat pull-right">Danh sách đơn hàng</a>
+                    <a href="<?php echo e(route('admin.transaction.index')); ?>" class="btn btn-sm btn-info btn-flat pull-right">Danh sách đơn hàng</a>
                 </div>
                 <!-- /.box-footer -->
             </div>
@@ -174,29 +175,29 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    @if (!sizeof($topPayProducts))
+                    <?php if(!sizeof($topPayProducts)): ?>
                         <div style="text-align:center;padding:20px">Không có sản phẩm nào</div>
-                    @endif
+                    <?php endif; ?>
                     <ul class="products-list product-list-in-box">
-                        @foreach($topPayProducts as $item)
+                        <?php $__currentLoopData = $topPayProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li class="item">
                             <div class="product-img">
-                                <img src="{{ pare_url_file($item->pro_avatar) }}" alt="Product Image">
+                                <img src="<?php echo e(pare_url_file($item->pro_avatar)); ?>" alt="Product Image">
                             </div>
                             <div class="product-info">
                                 <a href="javascript:void(0)" class="product-title">
-                                    {{  $item->pro_pay }} Lượt mua
-                                <span class="label label-warning pull-right">{{ number_format($item->pro_price,0,',','.') }} đ</span>
+                                    <?php echo e($item->pro_pay); ?> Lượt mua
+                                <span class="label label-warning pull-right"><?php echo e(number_format($item->pro_price,0,',','.')); ?> đ</span>
                                 </a>
-                                <span class="product-description">{{ $item->pro_name }}</span>
+                                <span class="product-description"><?php echo e($item->pro_name); ?></span>
                             </div>
                         </li>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer text-center">
-                    {{--<a href="javascript:void(0)" class="uppercase">View All Products</a>--}}
+                    
                 </div>
                 <!-- /.box-footer -->
             </div>
@@ -214,25 +215,25 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <ul class="products-list product-list-in-box">
-                        @foreach($topViewProducts as $item)
+                        <?php $__currentLoopData = $topViewProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li class="item">
                             <div class="product-img">
-                                <img src="{{ pare_url_file($item->pro_avatar) }}" alt="Product Image">
+                                <img src="<?php echo e(pare_url_file($item->pro_avatar)); ?>" alt="Product Image">
                             </div>
                             <div class="product-info">
                                 <a href="javascript:void(0)" class="product-title">
-                                    {{  $item->pro_view }} <i class="fa fa-eye"></i>
-                                <span class="label label-warning pull-right">{{ number_format($item->pro_price,0,',','.') }} đ</span>
+                                    <?php echo e($item->pro_view); ?> <i class="fa fa-eye"></i>
+                                <span class="label label-warning pull-right"><?php echo e(number_format($item->pro_price,0,',','.')); ?> đ</span>
                                 </a>
-                                <span class="product-description">{{ $item->pro_name }}</span>
+                                <span class="product-description"><?php echo e($item->pro_name); ?></span>
                             </div>
                         </li>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer text-center">
-                    {{--<a href="javascript:void(0)" class="uppercase">View All Products</a>--}}
+                    
                 </div>
                 <!-- /.box-footer -->
             </div>
@@ -242,13 +243,13 @@
     </div>
     <!-- /.row -->
 </section>
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('script')
+<?php $__env->startSection('script'); ?>
 <link rel="stylesheet" href="https://code.highcharts.com/css/highcharts.css">
     <script src="https://code.highcharts.com/highcharts.js"></script>
-    {{-- <script src="https://code.highcharts.com/modules/exporting.js"></script> --}}
-    {{-- <script src="https://code.highcharts.com/modules/export-data.js"></script> --}}
+    
+    
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script type="text/javascript">
         let dataTransaction = $("#container").attr('data-json');
@@ -337,4 +338,6 @@
             ]
         });
     </script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app_master_admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Hapi2hand_Finally\resources\views/admin/statistical/index.blade.php ENDPATH**/ ?>
