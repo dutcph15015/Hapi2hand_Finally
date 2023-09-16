@@ -9,7 +9,7 @@
 <section>
     <h1 class="title text-center" style="font-size: x-large !important; font-weight: bold;">Đổi Mật Khẩu</h1>
     <?php if(session('success')): ?>
-        <div class="alert alert-success text-center" style="color: #03a9f4; font-weight: 600; font-size: large;">
+        <div class="alert alert-success text-center" style="color: #009900; font-weight: 600; font-size: large;">
             <?php echo e(session('success')); ?>
 
         </div>

@@ -63,7 +63,7 @@ class UserInfoController extends Controller
                 $user->password = Hash::make($request->new_password);
                 $user->save();
 
-                return redirect()->back()->with('success', 'Mật khẩu đã được thay đổi thành công');
+                return redirect()->back()->with('success', 'Mật khẩu đã được thay đổi thành công!');
             } else {
                 return redirect()->back()->withErrors(['new_password' => 'Mật khẩu mới không được trùng với mật khẩu cũ!'])->withInput();
             }

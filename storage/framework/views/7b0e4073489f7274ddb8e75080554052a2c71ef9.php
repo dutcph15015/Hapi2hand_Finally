@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('content'); ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -60,6 +61,15 @@
             </div>
             <!-- /.col -->
         </div>
+        <div class="box-title" style="margin-bottom:15px">
+            <form class="form-inline">
+                <label for="start_date" style="margin-right:5px">Từ</label>
+                <input id="start_date" class="form-control" type="date" name="start_date" value="<?php echo e(Request::get('start_date')); ?>"/>
+                <label for="end_date" style="margin:0 5px">Đến</label>
+                <input id="end_date" class="form-control" type="date" name="end_date" value="<?php echo e(Request::get('end_date')); ?>"/>
+                <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Tìm kiếm</button>
+            </form>
+        </div>
 
     <!-- /.row -->
     <div class="row" style="margin-bottom: 15px;">
@@ -84,7 +94,7 @@
             <!-- TABLE: LATEST ORDERS -->
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Danh sách đơn hàng mới</h3>
+                    <h3 class="box-title">Danh sách đơn hàng <?php echo e(!!sizeof($transactions) ? '('.sizeof($transactions).' đơn hàng)' : ''); ?></h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                         </button>
@@ -106,6 +116,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php if(!sizeof($transactions)): ?>
+                                    <tr>
+                                        <td colspan="6" style="text-align:center;padding: 20px">Không có đơn hàng nào</div>
+                                    </tr>
+                                <?php endif; ?>
                                 <?php $__currentLoopData = $transactions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transaction): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td><?php echo e($transaction->id); ?></td>
@@ -160,6 +175,9 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
+                    <?php if(!sizeof($topPayProducts)): ?>
+                        <div style="text-align:center;padding:20px">Không có sản phẩm nào</div>
+                    <?php endif; ?>
                     <ul class="products-list product-list-in-box">
                         <?php $__currentLoopData = $topPayProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li class="item">
@@ -274,10 +292,7 @@
                 type: 'spline'
             },
             title: {
-                text: 'Biểu đồ doanh thu các ngày trong tháng'
-            },
-            subtitle: {
-                text: 'Source: WorldClimate.com'
+                text: 'Biểu đồ doanh thu'
             },
             xAxis: {
                 categories: listday
