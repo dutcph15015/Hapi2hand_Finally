@@ -39,8 +39,21 @@
             <tbody>
             @foreach($transactions as $transaction)
                 <tr>
+                    <style>
+                        .iddh {
+                            color: #000; /* Màu ban đầu của chữ */
+                            font-size: 400; /* Kích thước ban đầu của chữ */
+                            transition: color 0.3s, font-size 0.3s; /* Thời gian và thuộc tính chuyển đổi */
+                        }
+
+                        /* Khi hover, thay đổi màu và kích thước của chữ */
+                        .iddh:hover {
+                            color: #fb236a; /* Màu khi hover */
+                            font-weight: bolder; /* Kích thước khi hover */
+                        }
+                    </style>
                     <th scope="row">
-                        <a href="{{ route('get.user.order', $transaction->id) }}">DH{{ $transaction->id }}</a>
+                        <a class="iddh" href="{{ route('get.user.order', $transaction->id) }}">DH{{ $transaction->id }}</a>
                     </th>
                     <th>{{ $transaction->tst_name }}</th>
                     <th>{{ number_format($transaction->tst_total_money,0,',','.') }} đ</th>

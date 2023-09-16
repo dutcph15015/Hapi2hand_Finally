@@ -38,8 +38,21 @@
             <tbody>
             <?php $__currentLoopData = $transactions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transaction): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
+                    <style>
+                        .iddh {
+                            color: #000; /* Màu ban đầu của chữ */
+                            font-size: 400; /* Kích thước ban đầu của chữ */
+                            transition: color 0.3s, font-size 0.3s; /* Thời gian và thuộc tính chuyển đổi */
+                        }
+
+                        /* Khi hover, thay đổi màu và kích thước của chữ */
+                        .iddh:hover {
+                            color: #fb236a; /* Màu khi hover */
+                            font-weight: bolder; /* Kích thước khi hover */
+                        }
+                    </style>
                     <th scope="row">
-                        <a href="<?php echo e(route('get.user.order', $transaction->id)); ?>">DH<?php echo e($transaction->id); ?></a>
+                        <a class="iddh" href="<?php echo e(route('get.user.order', $transaction->id)); ?>">DH<?php echo e($transaction->id); ?></a>
                     </th>
                     <th><?php echo e($transaction->tst_name); ?></th>
                     <th><?php echo e(number_format($transaction->tst_total_money,0,',','.')); ?> đ</th>

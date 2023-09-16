@@ -108,7 +108,7 @@
                                 <a href="<?php echo e(route('get.shopping.add', $product->id)); ?>" title=""
                                    class="muangay" id="buy-now-btn">
                                     <span>Mua ngay</span>
-                                    <span>Hotline: 1800.6005</span>
+                                    <span>Hotline: 0559518488</span>
                                 </a>
                                 <a href="<?php echo e(route('ajax_get.user.add_favourite', $product->id)); ?>"
                                    title="Thêm sản phẩm yêu thích"

@@ -21,8 +21,23 @@
                     </thead>
                     <tbody>
                         <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <style>
+                                .iddh {
+                                    color: #000; /* Màu ban đầu của chữ */
+                                    font-size: 400; /* Kích thước ban đầu của chữ */
+                                    transition: color 0.3s, font-size 0.3s; /* Thời gian và thuộc tính chuyển đổi */
+                                }
+
+                                /* Khi hover, thay đổi màu và kích thước của chữ */
+                                .iddh:hover {
+                                    color: #fb236a; /* Màu khi hover */
+                                    font-size: large; /* Kích thước khi hover */
+                                }
+                          </style>
                             <tr>
-                                <th scope="row">DH<?php echo e($item->id); ?></th>
+                                <th scope="row">
+                                  <a class="iddh" href="<?php echo e(route('get.user.order', $item->id)); ?>">DH<?php echo e($item->id); ?></a>
+                                </th>
                                 <th><?php echo e($item->pro_name); ?></th>
                                 <th>
                                     <span class="label label-success"><?php echo e($item->category->c_name ?? "[N\A]"); ?></span>

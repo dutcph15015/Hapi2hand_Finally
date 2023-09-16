@@ -5,6 +5,10 @@
     <div class="container cart">
         <div class="left">
             <div class="list">
+            <?php if(session('error')): ?>
+                    <?php echo e(session('error')); ?>
+
+                <?php endif; ?>
                 <div class="title">THÔNG TIN GIỎ HÀNG</div>
                 <div class="list__content">
                     <table class="table">
@@ -123,10 +127,10 @@
                             </div>
                         </div>
                         <div class="btn-buy">
-                            <button class="buy1 btn btn-purple <?php echo e(\Auth::id() ? '' : 'js-show-login'); ?>" type="submit">
+                            <button class="buy1 btn btn-purple  }}" type="submit">
                                 Thanh toán khi nhận hàng
                             </button>
-                            <button class="btn btn-purple <?php echo e(\Auth::id() ? '' : 'js-show-login'); ?>" name="payment" value="2" type="submit">
+                            <button class="btn btn-purple  }}" name="payment" value="2" type="submit">
                                 <span class="">Thanh toán online</span>
                             </button>
                         </div>

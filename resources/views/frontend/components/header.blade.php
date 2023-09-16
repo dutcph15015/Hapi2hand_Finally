@@ -1,22 +1,36 @@
 <section class="top-header desktop">
+    <style>
+        .content .headerr {
+            font-weight: 550;
+            color: #000; /* Màu ban đầu của chữ */
+            transition: color 0.3s, font-size 0.3s; /* Thời gian và thuộc tính chuyển đổi */
+        }
+
+        /* Khi hover, thay đổi màu và kích thước của chữ */
+        .content a:hover {
+            color: black; /* Màu khi hover */
+            font-weight: 600;
+        }
+    </style>
     <div class="container">
         <div class="content">
             <div class="left">
-                 <a href="{{ route('get.static.customer_care') }}" title="Chăm sóc khách hàng" rel="nofollow">Chăm sóc khách hàng</a>
-                 <a href="{{ route('get.blog.home') }}" title="Tin tức & Mẹo" rel="nofollow">Tin tức & Mẹo</a>
+                 <a class="headerr" href="{{ route('get.static.customer_care') }}" title="Chăm sóc khách hàng" rel="nofollow">CSKH</a>
+                 <a class="headerr" href="{{ route('get.blog.home') }}" title="Tin tức & Mẹo" rel="nofollow">Tin tức & Mẹo</a>
+                 <a class="headerr" href="{{ route('get.contact') }}" title="Tin tức & Mẹo" rel="nofollow">Liên hệ</a>
                  @if (Auth::check())
-                    <a href="{{ route('get.user.transaction') }}" title="Kiểm tra đơn hàng" rel="nofollow">Kiểm tra đơn hàng</a>
+                    <a class="headerr" href="{{ route('get.user.transaction') }}" title="Kiểm tra đơn hàng" rel="nofollow">Kiểm tra đơn hàng</a>
                  @else
                  @endif
             </div>
             <div class="right">
                 @if (Auth::check())
-                    <a href="{{  route('get.user.dashboard') }}">Xin chào {{ Auth::user()->name }}</a>
-                    <a href="{{  route('get.user.dashboard') }}">Quản lý tài khoản</a>
-                    <a href="{{  route('get.logout') }}">Đăng xuất </a>
+                    <!-- <a href="{{  route('get.user.dashboard') }}">Xin chào {{ Auth::user()->name }}</a> -->
+                    <a class="headerr" href="{{  route('get.user.dashboard') }}">Quản lý tài khoản</a>
+                    <a class="headerr" href="{{  route('get.logout') }}">{{ Auth::user()->name }} (Đăng xuất) </a>
                 @else
-                    <a href="{{  route('get.register') }}">Đăng ký</a>
-                    <a href="{{  route('get.login') }}">Đăng nhập</a>
+                    <a class="headerr" href="{{  route('get.register') }}">Đăng ký</a>
+                    <a class="headerr" href="{{  route('get.login') }}">Đăng nhập</a>
                 @endif
              </div>
         </div>
