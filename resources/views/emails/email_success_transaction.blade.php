@@ -39,6 +39,6 @@
     </div>
     <div style="background: #f4f5f5;box-sizing: border-box;padding: 15px">
         <p style="margin:2px 0;color: #333">Email : admin@gmail.com</p>
-        <p style="margin:2px 0;color: #333">Phone : 0928817228</p>
+        <p style="margin:2px 0;color: #333">Phone : 0559518488</p>
     </div>
 </div>

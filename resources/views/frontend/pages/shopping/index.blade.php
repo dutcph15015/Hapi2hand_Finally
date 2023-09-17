@@ -162,7 +162,7 @@
                 let $input = $this.parent().prev();
                 let number = parseInt($input.val());
                 if (number >= 10) {
-					toastr.warning("Mỗi sản phẩm chỉ được mua tối đa số lượng 10 lần / 1 lần mua");
+					// toastr.warning("Mỗi sản phẩm chỉ được mua tối đa số lượng 10 lần / 1 lần mua");
                 	return false;
                 }
 
@@ -181,7 +181,7 @@
 					if (typeof results.totalMoney !== "undefined") {
 						$input.val(number);
 						$("#sub-total").text(results.totalMoney+ " đ");
-						toastr.success(results.messages);
+						// toastr.success(results.messages);
 						$this.parents('tr').find(".js-total-item").text(results.totalItem +' đ');
                     }else {
 						$input.val(number - 1);
@@ -194,7 +194,7 @@
                 let $input = $this.parent().prev();
                 let number = parseInt($input.val());
                 if (number <= 1) {
-					toastr.warning("Số lượng sản phẩm phải >= 1");
+					// toastr.warning("Số lượng sản phẩm phải >= 1");
                 	return false;
                 }
 
@@ -213,7 +213,7 @@
 					if (typeof results.totalMoney !== "undefined") {
 						$input.val(number);
 						$("#sub-total").text(results.totalMoney+ " đ");
-						toastr.success(results.messages);
+						// toastr.success(results.messages);
 						$this.parents('tr').find(".js-total-item").text(results.totalItem +' đ');
 					}else {
 						$input.val(number + 1);

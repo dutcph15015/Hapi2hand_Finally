@@ -11,14 +11,14 @@
                 <li>
                     <label>
                         <input type="checkbox" value="594">
-                        <h2><span>Đồng hồ Philippe Auguste</span></h2>
+                        <h2><span></span></h2>
                     </label>
                 </li>
 
                 <li>
                     <label>
                         <input type="checkbox" value="563">
-                        <h2><span>Đồng hồ Epos Swiss</span></h2>
+                        <h2><span></span></h2>
                     </label>
                 </li>
             </ul>

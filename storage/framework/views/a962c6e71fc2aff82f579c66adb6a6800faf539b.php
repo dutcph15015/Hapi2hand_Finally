@@ -21,10 +21,10 @@
             </ul>
         </div>
         <div class="auth" style="background: white;">
-            <form class="from_cart_register" id="forgotForm" action="<?php echo e(route('')); ?>" method="post" style="width: 500px;margin:0 auto;padding: 30px 0">
+            <form class="from_cart_register" id="forgotForm" action="" method="post" style="width: 500px;margin:0 auto;padding: 30px 0">
                 <?php echo csrf_field(); ?>
                 <div class="form-group">
-                    <p id="forgot-success"></p>
+                    <p id="forgot-success" style="text-align: center; font-weight: bold; font-size: large;"></p>
                     <p id="forgot-error"></p>
                     <label for="name">Email <span class="cRed">(*)</span></label>
                     <input name="email" id="name" required="" type="email" class="form-control" placeholder="nguyenvana@gmail.com"
@@ -33,20 +33,23 @@
                         <span class="text-danger"><?php echo e($errors->first('email')); ?></span>
                     <?php endif; ?>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-purple btn-xs">Lấy lại mật khẩu</button>
+                <div class="form-group" style="padding: 0 20%; display: flex;">
+                    <button class="btn btn-purple btn-xs"  id="btnGetPassword">Lấy lại mật khẩu</button>
+                    <a href="<?php echo e(route('get.login')); ?>" type="button" class="btn btn-purple btn-xs"  id="btnGetPassword">Quay lại trang đăng nhập</a>
                 </div>
             </form>
         </div>
     </div>
     
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
      <!-- AJAX Forgot -->
      <script>
         $("#forgotForm").submit(function(event) {
             event.preventDefault();
             var formdata = $(this).serialize();
             $.ajax({
-                url: "/forgot-password",
+                url: "/account/forget-password",
                 type: "POST",
                 data: formdata,
                 success: function(resp) {
@@ -63,11 +66,11 @@
                         $("#forgot-success").html(resp.message);
 
                         // Hiển thị modal quay về đăng nhập
-                        $('#loginModal').show();
-                        // Xử lý sự kiện nút "Quay lại"
-                        $("#backToLoginBtn").click(function() {
-                            window.location.href = "/login";
-                        });
+                        // $('#loginModal').show();
+                        // // Xử lý sự kiện nút "Quay lại"
+                        // $("#backToLoginBtn").click(function() {
+                        //     window.location.href = "/login";
+                        // });
                     }
                 },
                 error: function() {
@@ -78,4 +81,4 @@
     </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app_master_frontend', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\ADMIN\web_ban_giay_L9\web_ban_giay_Hapi2hand_Finally\resources\views/auth/passwords/email.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app_master_frontend', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\ADMIN\web_ban_giay_L9\web_ban_giay_Hapi2hand_Finally\resources\views/auth/passwords/forget.blade.php ENDPATH**/ ?>

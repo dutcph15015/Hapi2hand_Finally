@@ -5,10 +5,6 @@
     <div class="container cart">
         <div class="left">
             <div class="list">
-            <?php if(session('error')): ?>
-                    <?php echo e(session('error')); ?>
-
-                <?php endif; ?>
                 <div class="title">THÔNG TIN GIỎ HÀNG</div>
                 <div class="list__content">
                     <table class="table">
@@ -127,10 +123,10 @@
                             </div>
                         </div>
                         <div class="btn-buy">
-                            <button class="buy1 btn btn-purple  }}" type="submit">
+                            <button class="buy1 btn btn-purple <?php echo e(\Auth::id() ? '' : 'js-show-login'); ?>" type="submit">
                                 Thanh toán khi nhận hàng
                             </button>
-                            <button class="btn btn-purple  }}" name="payment" value="2" type="submit">
+                            <button class="btn btn-purple <?php echo e(\Auth::id() ? '' : 'js-show-login'); ?>" name="payment" value="2" type="submit">
                                 <span class="">Thanh toán online</span>
                             </button>
                         </div>
@@ -168,7 +164,7 @@
                 let $input = $this.parent().prev();
                 let number = parseInt($input.val());
                 if (number >= 10) {
-					toastr.warning("Mỗi sản phẩm chỉ được mua tối đa số lượng 10 lần / 1 lần mua");
+					// toastr.warning("Mỗi sản phẩm chỉ được mua tối đa số lượng 10 lần / 1 lần mua");
                 	return false;
                 }
 
@@ -187,7 +183,7 @@
 					if (typeof results.totalMoney !== "undefined") {
 						$input.val(number);
 						$("#sub-total").text(results.totalMoney+ " đ");
-						toastr.success(results.messages);
+						// toastr.success(results.messages);
 						$this.parents('tr').find(".js-total-item").text(results.totalItem +' đ');
                     }else {
 						$input.val(number - 1);
@@ -200,7 +196,7 @@
                 let $input = $this.parent().prev();
                 let number = parseInt($input.val());
                 if (number <= 1) {
-					toastr.warning("Số lượng sản phẩm phải >= 1");
+					// toastr.warning("Số lượng sản phẩm phải >= 1");
                 	return false;
                 }
 
@@ -219,7 +215,7 @@
 					if (typeof results.totalMoney !== "undefined") {
 						$input.val(number);
 						$("#sub-total").text(results.totalMoney+ " đ");
-						toastr.success(results.messages);
+						// toastr.success(results.messages);
 						$this.parents('tr').find(".js-total-item").text(results.totalItem +' đ');
 					}else {
 						$input.val(number + 1);

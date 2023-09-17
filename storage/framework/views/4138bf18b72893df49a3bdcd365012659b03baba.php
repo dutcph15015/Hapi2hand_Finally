@@ -51,12 +51,12 @@
                                         <input type="text" class="form-control" name="address" placeholder="Nhập địa chỉ cá nhân" value="<?php echo e($admin->address); ?>">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="inputName" class="col-sm-2 control-label">Lớp</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="class" placeholder="Lớp học" value="<?php echo e($admin->class); ?>">
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label for="inputName" class="col-sm-2 control-label">Ảnh đại diện</label>
                                     <div class="col-sm-10">

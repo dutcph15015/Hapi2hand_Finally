@@ -178,7 +178,7 @@ class ShoppingCartController extends Controller
             return response([
                 'totalMoney' => \Cart::subtotal(0),
                 'type'       => 'success',
-                'message'    => 'Xoá sản phẩm khỏi đơn hàng thành công'
+                'messages'    => 'Xoá sản phẩm khỏi giỏ hàng thành công'
             ]);
         }
     }
@@ -189,11 +189,20 @@ class ShoppingCartController extends Controller
         {
             $discount = DiscountCode::where('d_code', $request->discount_code)->first();
 
-            if ($discount->d_number_code == 0) {
+            try {
+                if ($discount->d_number_code < 1) {                       
+                    return response([
+                        'totalMoney'  => \Cart::subtotal(0),
+                        'type' => 'error',
+                        'messages'    => 'Số lượng mã giảm giá đã hết!'
+                    ]);
+                }
+            } catch (\Exception $e) {
+                // Xử lý trường hợp không tìm thấy mã giảm giá         
                 return response([
-                    'totalMoney' => \Cart::subtotal(0),
-                    'type'       => 'errors',
-                    'message'    => 'Số lượng mã giảm giá đã hết'
+                    'totalMoney'  => \Cart::subtotal(0),
+                    'type' => 'error',
+                    'messages'    => 'Mã giảm giá không tồn tại!'
                 ]);
             }
 
@@ -205,7 +214,7 @@ class ShoppingCartController extends Controller
             return response([
                 'totalMoney' => \Cart::subtotal(0),
                 'type'       => 'success',
-                'message'    => ''
+                'messages'    => 'Áp mã giảm giá thành công!'
             ]);
         }
     }
@@ -281,7 +290,7 @@ class ShoppingCartController extends Controller
 
                 if ($transactionID) {
                     $shopping = \Cart::content();
-                    //Mail::to($request->tst_email)->send(new TransactionSuccess($shopping));
+                    Mail::to($request->tst_email)->send(new TransactionSuccess($shopping));
 
                     foreach ($shopping as $key => $item) {
 
