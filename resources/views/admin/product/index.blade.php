@@ -80,7 +80,7 @@
                                                     <a href="{{ route('admin.product.hot', $product->id) }}" class="label label-default">None</a>
                                                 @endif
                                             </td>
-                                            <td>{{ ($product->pro_number - $product->pro_pay) > 0 ? $product->pro_number - $product->pro_pay : 0 }}</td>
+                                            <td>{{ $product->pro_number}}</td>
                                             <td>
                                                 @if ($product->pro_active == 1)
                                                     <a href="{{ route('admin.product.active', $product->id) }}" class="label label-info">Active</a>

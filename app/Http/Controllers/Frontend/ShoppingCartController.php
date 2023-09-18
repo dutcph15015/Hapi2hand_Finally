@@ -13,7 +13,7 @@ use App\Mail\TransactionSuccess;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Models\DiscountCode;
-
+use Illuminate\Support\Facades\Session;
 
 class ShoppingCartController extends Controller
 {
@@ -34,15 +34,17 @@ class ShoppingCartController extends Controller
     {
         $product = Product::find($id);
 
-        //1. Kiểm tra tồn tại sản phẩm
-        if (!$product) return redirect()->to('/');
+        // //1. Kiểm tra tồn tại sản phẩm
+        // if (!$product) {
+        //     return response()->json(['type' => 'error', 'messages' => 'Sản phẩm không tồn tại']);
+        // }
 
-        // 2. Kiểm tra số lượng sản phẩm
+      // 2. Kiểm tra số lượng sản phẩm
         if ($product->pro_number < 1) {
-            //4. Thông báo
-            \Session::flash('toastr', [
+            // 3. Thông báo hết hàng
+            Session::flash('toastr', [
                 'type'    => 'error',
-                'message' => 'Số lượng sản phẩm không đủ'
+                'message' => 'Sản phẩm đã Hết hàng!'
             ]);
 
             return redirect()->back();

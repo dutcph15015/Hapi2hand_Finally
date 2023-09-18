@@ -79,7 +79,7 @@
                                                     <a href="<?php echo e(route('admin.product.hot', $product->id)); ?>" class="label label-default">None</a>
                                                 <?php endif; ?>
                                             </td>
-                                            <td><?php echo e(($product->pro_number - $product->pro_pay) > 0 ? $product->pro_number - $product->pro_pay : 0); ?></td>
+                                            <td><?php echo e($product->pro_number); ?></td>
                                             <td>
                                                 <?php if($product->pro_active == 1): ?>
                                                     <a href="<?php echo e(route('admin.product.active', $product->id)); ?>" class="label label-info">Active</a>

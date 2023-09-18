@@ -714,12 +714,11 @@
                                                                     style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:18px;color:#000000;font-size:12px">
-                                                                        Địa chỉ: Tầng 5,&nbsp; Tòa M (Melody), Tòa 6th
-                                                                        Element,<br></p>
+                                                                        Địa chỉ: Số nhà 55,&nbsp; Ngõ 210, Tòa Hapi2hand<br></p>
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:18px;color:#000000;font-size:12px">
-                                                                        Đường Nguyễn Văn Huyên, Phường Xuân La, Quận Tây
-                                                                        Hồ, TP. Hà Nội, Việt Nam.</p>
+                                                                        Đường Hoàng Quán Chi, Phường Yên Hòa, Quận Cầu
+                                                                        Giấy, TP. Hà Nội, Việt Nam.</p>
                                                                 </td>
                                                             </tr>
                                                         </table>

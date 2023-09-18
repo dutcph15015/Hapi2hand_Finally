@@ -58,6 +58,10 @@
                                     <span>View :&nbsp</span>
                                     <span><?php echo e($product->pro_view); ?></span>
                                 </p>
+                                <p>
+                                    <span>Số lượng còn :&nbsp</span>
+                                    <span style="font-weight: bold; font-size: large;"><?php echo e($product->pro_number); ?></span>
+                                </p>
                             </div>
                             <?php if($product->attributes->count() > 0): ?>
                                 <div>

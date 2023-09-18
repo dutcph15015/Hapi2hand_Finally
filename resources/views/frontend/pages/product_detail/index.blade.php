@@ -59,6 +59,10 @@
                                     <span>View :&nbsp</span>
                                     <span>{{ $product->pro_view }}</span>
                                 </p>
+                                <p>
+                                    <span>Số lượng còn :&nbsp</span>
+                                    <span style="font-weight: bold; font-size: large;">{{ $product->pro_number }}</span>
+                                </p>
                             </div>
                             @if($product->attributes->count() > 0)
                                 <div>

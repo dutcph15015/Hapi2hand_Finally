@@ -26,7 +26,7 @@
                 @csrf
                 <div class="form-group">
                     <p id="forgot-success" style="text-align: center; font-weight: bold; font-size: large;"></p>
-                    <p id="forgot-error"></p>
+                    <p id="forgot-error" style="text-align: center; font-weight: bold; font-size: large;"></p>
                     <label for="name">Email <span class="cRed">(*)</span></label>
                     <input name="email" id="name" required="" type="email" class="form-control" placeholder="nguyenvana@gmail.com"
                     oninvalid="this.setCustomValidity('Vui lòng nhập chính xác Email!')" oninput="setCustomValidity('')">
@@ -55,23 +55,21 @@
                 data: formdata,
                 success: function(resp) {
                     if (resp.type == "error") {
+                        $("#forgot-email").hide();
                         $(".loader").hide();
-                        $.each(resp.errors, function(i, error) {
-                            $("#forgot-" + i).css('color', 'red');
-                            $("#forgot-" + i).html(error);
-                        });
+                        $("#forgot-error").css('color', 'red');
+                        $("#forgot-error").html(resp.errors.email);
+                        setTimeout(function() {
+                        $("#forgot-error").html('');
+                        }, 4000);
                     } else if (resp.type == "success") {
                         $("#forgot-email").hide();
                         $(".loader").hide();
                         $("#forgot-success").css('color', 'green');
-                        $("#forgot-success").html(resp.message);
-
-                        // Hiển thị modal quay về đăng nhập
-                        // $('#loginModal').show();
-                        // // Xử lý sự kiện nút "Quay lại"
-                        // $("#backToLoginBtn").click(function() {
-                        //     window.location.href = "/login";
-                        // });
+                        $("#forgot-success").html(resp.message);   
+                        setTimeout(function() {
+                        $("#forgot-success").html('');
+                        }, 4000);
                     }
                 },
                 error: function() {
