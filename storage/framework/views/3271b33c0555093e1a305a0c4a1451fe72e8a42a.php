@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('content'); ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -57,4 +58,4 @@
     </section>
     <!-- /.content -->
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.app_master_admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\ADMIN\web_ban_giay_L9\web_ban_giay_L9\resources\views/admin/producer/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app_master_admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Hapi2hand_Finally\resources\views/admin/producer/index.blade.php ENDPATH**/ ?>

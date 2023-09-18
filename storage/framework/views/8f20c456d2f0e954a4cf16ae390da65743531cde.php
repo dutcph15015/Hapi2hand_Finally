@@ -24,7 +24,6 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Time</th>
-                                    <th>Action</th>
                                 </tr>
                                 <?php if(isset($users)): ?>
                                     <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -34,10 +33,6 @@
                                             <td><?php echo e($user->email); ?></td>
                                             <td><?php echo e($user->phone); ?></td>
                                             <td><?php echo e($user->created_at); ?></td>
-                                            <td>
-                                                
-                                                <a href="<?php echo e(route('admin.user.delete', $user->id)); ?>" class="btn btn-xs btn-danger js-delete-confirm"><i class="fa fa-trash"></i> Delete</a>
-                                            </td>
                                         </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 <?php endif; ?>

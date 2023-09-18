@@ -32,9 +32,6 @@
                             <option value="-1" {{ Request::get('status') == -1 ? "selected='selected'" : "" }}>Huỷ bỏ</option>
                         </select>
                         <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Search</button>
-                        <button type="submit" name="export" value="true" class="btn btn-info">
-                            <i class="fa fa-save"></i> Export
-                        </button>
                     </form>
                 </div>
                 <div class="box-body">
@@ -94,29 +91,32 @@
                                             <td>
                                                 <a data-id="{{  $transaction->id }}" href="{{ route('ajax.admin.transaction.detail', $transaction->id) }}" class="btn btn-xs btn-info js-preview-transaction"><i class="fa fa-eye"></i> View</a>
 
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-success btn-xs">Action</button>
-                                                    <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                        <span class="caret"></span>
-                                                        <span class="sr-only">Toggle Dropdown</span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" role="menu">
-                                                        <li>
-                                                            <a href="{{  route('admin.transaction.delete', $transaction->id) }}" class="js-delete-confirm"><i class="fa fa-trash"></i> Delete</a>
-                                                        </li>
-                                                        <li class="divider"></li>
-                                                        <li>
-                                                            <a href="{{ route('admin.action.transaction',['process', $transaction->id]) }}" ><i class="fa fa-ban"></i> Đang vận chuyển</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="{{ route('admin.action.transaction',['success', $transaction->id]) }}" ><i class="fa fa-ban"></i> Đã hoàn thành </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="{{ route('admin.action.transaction',['cancel', $transaction->id]) }}" ><i class="fa fa-ban"></i> Huỷ Đơn</a>
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
+                                                @if ($transaction->tst_status > 0 && $transaction->tst_status < 3)
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-success btn-xs">Action</button>
+                                                        <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                            <span class="caret"></span>
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            @if($transaction->tst_status === 1)
+                                                                <li>
+                                                                    <a href="{{ route('admin.action.transaction',['process', $transaction->id]) }}" ><i class="fa fa-truck"></i> Đang vận chuyển</a>
+                                                                </li>
+                                                            @endif
+                                                            @if($transaction->tst_status === 2)
+                                                                <li>
+                                                                    <a href="{{ route('admin.action.transaction',['success', $transaction->id]) }}" ><i class="fa fa-check"></i> Đã hoàn thành </a>
+                                                                </li>
+                                                            @endif
+                                                            @if($transaction->tst_status === 1)
+                                                                <li>
+                                                                    <a href="{{ route('admin.action.transaction',['cancel', $transaction->id]) }}" ><i class="fa fa-ban"></i> Huỷ Đơn</a>
+                                                                </li>
+                                                            @endif
+                                                        </ul>
+                                                    </div>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -149,7 +149,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Lưu dữ liệu</button>
                 </div>
             </div>
         <!-- /.modal-content -->
