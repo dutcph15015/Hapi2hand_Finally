@@ -274,8 +274,8 @@ class ShoppingCartController extends Controller
 
         $vnp_Url = env('VNP_URL') . "?" . $query;
         if (env('VNP_HASH_SECRET')) {
-            $vnpSecureHash = hash('sha256', env('VNP_HASH_SECRET') . $hashdata);
-            $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
+            $vnpSecureHash = hash_hmac('sha512', $hashdata ,env('VNP_HASH_SECRET'));
+            $vnp_Url .= 'vnp_SecureHashType=SHA512&vnp_SecureHash=' . $vnpSecureHash;
         }
 
         return redirect($vnp_Url);

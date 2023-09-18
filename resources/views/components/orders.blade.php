@@ -7,7 +7,7 @@
             <th>Giá</th>
             <th>Số lượng</th>
             <th>Tổng tiền</th>
-            <th>Hành động</th>
+            <!-- <th>Hành động</th> -->
         </tr>
         @foreach($orders as $item)
             <tr>
@@ -39,9 +39,9 @@
                 <td>{{ number_format($item->od_price,0,',','.') }} đ</td>
                 <td>{{ $item->od_qty }}</td>
                 <td>{{ number_format($item->od_price * $item->od_qty,0,',','.') }} đ</td>
-                <td>
+                <!-- <td>
                     <a href="{{ route('ajax_admin.transaction.order_item', $item->id) }}" class="btn btn-xs btn-danger js-delete-order-item">Delete</a>
-                </td>
+                </td> -->
             </tr>
         @endforeach
     </tbody>
