@@ -105,9 +105,9 @@
                                                         <span class="sr-only">Toggle Dropdown</span>
                                                     </button>
                                                     <ul class="dropdown-menu" role="menu">
-                                                        <li>
+                                                        <!-- <li>
                                                             <a href="<?php echo e(route('admin.transaction.delete', $transaction->id)); ?>" class="js-delete-confirm"><i class="fa fa-trash"></i> Delete</a>
-                                                        </li>
+                                                        </li> -->
                                                         <li class="divider"></li>
                                                         <li>
                                                             <a href="<?php echo e(route('admin.action.transaction',['process', $transaction->id])); ?>" ><i class="fa fa-ban"></i> Đang vận chuyển</a>

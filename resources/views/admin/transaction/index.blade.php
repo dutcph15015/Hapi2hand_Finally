@@ -114,6 +114,7 @@
                                                         <!-- <li>
                                                             <a href="{{  route('admin.transaction.delete', $transaction->id) }}" class="js-delete-confirm"><i class="fa fa-trash"></i> Delete</a>
                                                         </li> -->
+
                                                         <!-- <li class="divider"></li> -->
 
                                                         <li>

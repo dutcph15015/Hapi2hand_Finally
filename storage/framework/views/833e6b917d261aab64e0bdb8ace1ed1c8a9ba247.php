@@ -21,7 +21,15 @@
             <div class="col-4">
                 <h5>Hình thức thanh toán</h5>
                 <div class="box">
-                    <p>Hình thức: <b>Giao hàng nhận tiền</b></p>
+                    <p>Hình thức: 
+                        <b>                        
+                            <?php if($transaction->payment): ?>
+                                 Thanh toán Online
+                            <?php else: ?>
+                                 Thanh toán khi nhận hàng
+                            <?php endif; ?>
+                         </b>
+                    </p>
                     <p>Tổng tiền: <b><?php echo e(number_format($transaction->tst_total_money,0,',','.')); ?> VNĐ</b></p>
                 </div>
             </div>
