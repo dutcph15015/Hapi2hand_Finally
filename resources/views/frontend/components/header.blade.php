@@ -106,7 +106,9 @@
                     <li>
                         <a href="{{  route('get.category.list', $item->c_slug.'-'.$item->id) }}"
                            title="{{  $item->c_name }}" class="js-open-menu">
-                            <img src="{{ pare_url_file($item->c_avatar) }}" alt="{{ $item->c_name }}">
+                            @if (isset($item->c_avatar))
+                                <img src="{{ pare_url_file($item->c_avatar) }}" alt="{{ $item->c_name }}">
+                            @endif
                             <span>{{  $item->c_name }}</span>
                             @if (isset($item->children) && count($item->children))
                                 <span class="fa fa-angle-right"></span>
