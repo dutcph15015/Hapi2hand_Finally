@@ -28,7 +28,9 @@
                             <option value="">Trạng thái</option>
                             <option value="1" {{ Request::get('status') == 1 ? "selected='selected'" : "" }}>Tiếp nhận</option>
                             <option value="2" {{ Request::get('status') == 2 ? "selected='selected'" : "" }}>Đang vận chuyển</option>
-                            <option value="3" {{ Request::get('status') == 3 ? "selected='selected'" : "" }}>Đã hoàn thành</option>
+
+                            <option value="3" {{ Request::get('status') == 3 ? "selected='selected'" : "" }}>Hoàn thành</option>
+
                             <option value="-1" {{ Request::get('status') == -1 ? "selected='selected'" : "" }}>Huỷ bỏ</option>
                         </select>
                         <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Search</button>
@@ -46,6 +48,7 @@
                                     <th>Phương thức thanh toán</th>
                                     <th>Trạng thái</th>
                                     <th>Ngày tạo</th>
+                                    <th>Ngày cập nhật</th>
                                     <th>Hành động</th>
                                 </tr>
                                 @if (isset($transactions))
@@ -88,6 +91,7 @@
                                                 </span>
                                             </td>
                                             <td>{{  $transaction->created_at }}</td>
+                                            <td>{{  $transaction->updated_at }}</td>
                                             <td>
                                                 <a data-id="{{  $transaction->id }}" href="{{ route('ajax.admin.transaction.detail', $transaction->id) }}" class="btn btn-xs btn-info js-preview-transaction"><i class="fa fa-eye"></i> View</a>
 
@@ -106,7 +110,7 @@
                                                             @endif
                                                             @if($transaction->tst_status === 2)
                                                                 <li>
-                                                                    <a href="{{ route('admin.action.transaction',['success', $transaction->id]) }}" ><i class="fa fa-check"></i> Đã hoàn thành </a>
+                                                                    <a href="{{ route('admin.action.transaction',['success', $transaction->id]) }}" ><i class="fa fa-check"></i> Hoàn thành </a>
                                                                 </li>
                                                             @endif
                                                             @if($transaction->tst_status === 1)

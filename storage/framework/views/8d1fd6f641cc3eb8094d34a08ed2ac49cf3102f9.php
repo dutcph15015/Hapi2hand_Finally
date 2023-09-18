@@ -99,7 +99,7 @@
                                 </div>
                             <?php endif; ?>
 
-                            <div>
+                            <!-- <div>
                                 <div style="float: left; width: 30%; line-height: 36px;">
                                     Giới tính :
                                 </div>
@@ -107,9 +107,9 @@
                                     <label for="gender-male" style="line-height: 40px;"><input type="radio" name="gender" value="1" id="gender-male">&nbsp; Nam</label> &nbsp; &nbsp;
                                     <label for="gender-female"><input type="radio" name="gender" value="2" id="gender-female">&nbsp; Nữ</label>
                                 </div>
-                            </div>
+                            </div> -->
                             <div style="clear: both;"></div>
-                            <div class="btn-cart">
+                            <div class="btn-cart" style="margin-top: 10px;">
                                 <a href="<?php echo e(route('get.shopping.add', $product->id)); ?>" title=""
                                    class="muangay" id="buy-now-btn">
                                     <span>Mua ngay</span>
@@ -216,12 +216,12 @@
 
         var size = $('#product-size').val();
         var color = $('#product-color').val();
-        var gender = $('input[name=gender]:checked').val() !== undefined ? $('input[name=gender]:checked').val() : '';
+        // var gender = $('input[name=gender]:checked').val() !== undefined ? $('input[name=gender]:checked').val() : '';
 
         // Kiểm tra xem các trường đã được chọn hay chưa
-        if (size === '' || color === '' || gender === '') {
+        if (size === '' || color === '') {
             // Nếu bất kỳ trường nào chưa được chọn, hiển thị thông báo hoặc thực hiện hành động phù hợp ở đây
-            alert('Vui lòng chọn size, màu và giới tính trước khi mua hàng.');
+            alert('Vui lòng chọn size, màu trước khi mua hàng.');
         } else {
             // Tất cả các trường đã được chọn, thực hiện yêu cầu AJAX
             var link = $(this).attr('href');
@@ -231,7 +231,7 @@
                 type: 'GET',
                 data: {
                     size: size,
-                    gender: gender,
+                    // gender: gender,
                     color: color,
                 }
             }).done(function (result) {

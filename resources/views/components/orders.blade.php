@@ -26,11 +26,6 @@
                         @endif
                     </span>
                     <br>
-                    <span>
-                        @if($item->od_color)
-                            Giới tính : {{ $item->od_gender == 1 ? 'Nam' :  'Nữ' }}
-                        @endif
-                    </span>
                 </td>
                 <td>
                     <img alt="" style="width: 60px;height: 80px" src="{{ pare_url_file($item->product->pro_avatar ?? "") }}" class="lazyload">

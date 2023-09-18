@@ -27,7 +27,11 @@
                             <option value="">Trạng thái</option>
                             <option value="1" <?php echo e(Request::get('status') == 1 ? "selected='selected'" : ""); ?>>Tiếp nhận</option>
                             <option value="2" <?php echo e(Request::get('status') == 2 ? "selected='selected'" : ""); ?>>Đang vận chuyển</option>
+<<<<<<< Updated upstream
                             <option value="3" <?php echo e(Request::get('status') == 3 ? "selected='selected'" : ""); ?>>Đã hoàn thành</option>
+=======
+                            <option value="3" <?php echo e(Request::get('status') == 3 ? "selected='selected'" : ""); ?>>Hoàn thành</option>
+>>>>>>> Stashed changes
                             <option value="-1" <?php echo e(Request::get('status') == -1 ? "selected='selected'" : ""); ?>>Huỷ bỏ</option>
                         </select>
                         <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Search</button>
@@ -101,15 +105,19 @@
                                                         <span class="sr-only">Toggle Dropdown</span>
                                                     </button>
                                                     <ul class="dropdown-menu" role="menu">
-                                                        <li>
+                                                        <!-- <li>
                                                             <a href="<?php echo e(route('admin.transaction.delete', $transaction->id)); ?>" class="js-delete-confirm"><i class="fa fa-trash"></i> Delete</a>
-                                                        </li>
+                                                        </li> -->
                                                         <li class="divider"></li>
                                                         <li>
                                                             <a href="<?php echo e(route('admin.action.transaction',['process', $transaction->id])); ?>" ><i class="fa fa-ban"></i> Đang vận chuyển</a>
                                                         </li>
                                                         <li>
+<<<<<<< Updated upstream
                                                             <a href="<?php echo e(route('admin.action.transaction',['success', $transaction->id])); ?>" ><i class="fa fa-ban"></i> Đã hoàn thành </a>
+=======
+                                                            <a href="<?php echo e(route('admin.action.transaction',['success', $transaction->id])); ?>" ><i class="fa fa-ban"></i> Hoàn thành</a>
+>>>>>>> Stashed changes
                                                         </li>
                                                         <li>
                                                             <a href="<?php echo e(route('admin.action.transaction',['cancel', $transaction->id])); ?>" ><i class="fa fa-ban"></i> Huỷ Đơn</a>

@@ -28,7 +28,9 @@
                             <option value="">Trạng thái</option>
                             <option value="1" <?php echo e(Request::get('status') == 1 ? "selected='selected'" : ""); ?>>Tiếp nhận</option>
                             <option value="2" <?php echo e(Request::get('status') == 2 ? "selected='selected'" : ""); ?>>Đang vận chuyển</option>
-                            <option value="3" <?php echo e(Request::get('status') == 3 ? "selected='selected'" : ""); ?>>Đã hoàn thành</option>
+
+                            <option value="3" <?php echo e(Request::get('status') == 3 ? "selected='selected'" : ""); ?>>Hoàn thành</option>
+
                             <option value="-1" <?php echo e(Request::get('status') == -1 ? "selected='selected'" : ""); ?>>Huỷ bỏ</option>
                         </select>
                         <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Search</button>
@@ -46,6 +48,7 @@
                                     <th>Phương thức thanh toán</th>
                                     <th>Trạng thái</th>
                                     <th>Ngày tạo</th>
+                                    <th>Ngày cập nhật</th>
                                     <th>Hành động</th>
                                 </tr>
                                 <?php if(isset($transactions)): ?>
@@ -89,6 +92,7 @@
                                                 </span>
                                             </td>
                                             <td><?php echo e($transaction->created_at); ?></td>
+                                            <td><?php echo e($transaction->updated_at); ?></td>
                                             <td>
                                                 <a data-id="<?php echo e($transaction->id); ?>" href="<?php echo e(route('ajax.admin.transaction.detail', $transaction->id)); ?>" class="btn btn-xs btn-info js-preview-transaction"><i class="fa fa-eye"></i> View</a>
 
@@ -107,7 +111,7 @@
                                                             <?php endif; ?>
                                                             <?php if($transaction->tst_status === 2): ?>
                                                                 <li>
-                                                                    <a href="<?php echo e(route('admin.action.transaction',['success', $transaction->id])); ?>" ><i class="fa fa-check"></i> Đã hoàn thành </a>
+                                                                    <a href="<?php echo e(route('admin.action.transaction',['success', $transaction->id])); ?>" ><i class="fa fa-check"></i> Hoàn thành </a>
                                                                 </li>
                                                             <?php endif; ?>
                                                             <?php if($transaction->tst_status === 1): ?>
