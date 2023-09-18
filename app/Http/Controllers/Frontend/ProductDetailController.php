@@ -37,7 +37,7 @@ class ProductDetailController extends FrontendController
                 ->addSelect('r_number')
                 ->get()->toArray();
 
-            $ratingDefault = $this->mapRatingDefault();
+            $ratingDefault = $this->mapRatingDefault($ratingsDashboard);
 
             //  4 Lấy comment
             $comments = Comments::with('user:id,name', 'reply')
@@ -113,7 +113,7 @@ class ProductDetailController extends FrontendController
                 ->addSelect('r_number')
                 ->get()->toArray();
 
-            $ratingDefault = $this->mapRatingDefault();
+            $ratingDefault = $this->mapRatingDefault($ratingsDashboard);
 
             foreach ($ratingsDashboard as $key => $item) {
                 $ratingDefault[$item['r_number']] = $item;
@@ -132,15 +132,24 @@ class ProductDetailController extends FrontendController
         return redirect()->to('/');
     }
 
-    private function mapRatingDefault()
+    private function mapRatingDefault($data)
     {
         $ratingDefault = [];
         for ($i = 1; $i <= 5; $i++) {
-            $ratingDefault[$i] = [
-                "count_number" => 0,
-                "total"        => 0,
-                "r_number"     => 0
-            ];
+            $set = false;
+            foreach ($data as $item) {
+                if ($item['r_number'] === $i) {
+                    $ratingDefault[$i] = $item;
+                    $set = true;
+                }
+            }
+            if(!$set) {
+                $ratingDefault[$i] = [
+                    "count_number" => 0,
+                    "total"        => 0,
+                    "r_number"     => 0
+                ];
+            }
         }
 
 
