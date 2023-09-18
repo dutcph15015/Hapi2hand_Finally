@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('css'); ?>
     <style>
 		<?php $style = file_get_contents('css/user.min.css');echo $style;?>
@@ -38,8 +39,21 @@
             <tbody>
             <?php $__currentLoopData = $transactions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transaction): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
+                    <style>
+                        .iddh {
+                            color: #000; /* Màu ban đầu của chữ */
+                            font-size: 400; /* Kích thước ban đầu của chữ */
+                            transition: color 0.3s, font-size 0.3s; /* Thời gian và thuộc tính chuyển đổi */
+                        }
+
+                        /* Khi hover, thay đổi màu và kích thước của chữ */
+                        .iddh:hover {
+                            color: #fb236a; /* Màu khi hover */
+                            font-weight: bolder; /* Kích thước khi hover */
+                        }
+                    </style>
                     <th scope="row">
-                        <a href="<?php echo e(route('get.user.order', $transaction->id)); ?>">DH<?php echo e($transaction->id); ?></a>
+                        <a class="iddh" href="<?php echo e(route('get.user.order', $transaction->id)); ?>">DH<?php echo e($transaction->id); ?></a>
                     </th>
                     <th><?php echo e($transaction->tst_name); ?></th>
                     <th><?php echo e(number_format($transaction->tst_total_money,0,',','.')); ?> đ</th>
@@ -59,4 +73,4 @@
     </section>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app_master_user', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Lập Trình Web PHP NC\Project_Laravel\web_ban_giay_L9\resources\views/user/transaction.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app_master_user', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\HOC\PHP\xampp\htdocs\Hapi2hand_Finally\resources\views/user/transaction.blade.php ENDPATH**/ ?>

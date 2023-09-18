@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('content'); ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -27,7 +28,7 @@
                             <option value="">Trạng thái</option>
                             <option value="1" <?php echo e(Request::get('status') == 1 ? "selected='selected'" : ""); ?>>Tiếp nhận</option>
                             <option value="2" <?php echo e(Request::get('status') == 2 ? "selected='selected'" : ""); ?>>Đang vận chuyển</option>
-                            <option value="3" <?php echo e(Request::get('status') == 3 ? "selected='selected'" : ""); ?>>Hoàn thành</option>
+                            <option value="3" <?php echo e(Request::get('status') == 3 ? "selected='selected'" : ""); ?>>Đã hoàn thành</option>
                             <option value="-1" <?php echo e(Request::get('status') == -1 ? "selected='selected'" : ""); ?>>Huỷ bỏ</option>
                         </select>
                         <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Search</button>
@@ -109,10 +110,10 @@
                                                             <a href="<?php echo e(route('admin.action.transaction',['process', $transaction->id])); ?>" ><i class="fa fa-ban"></i> Đang vận chuyển</a>
                                                         </li>
                                                         <li>
-                                                            <a href="<?php echo e(route('admin.action.transaction',['success', $transaction->id])); ?>" ><i class="fa fa-ban"></i> Hoàn thành</a>
+                                                            <a href="<?php echo e(route('admin.action.transaction',['success', $transaction->id])); ?>" ><i class="fa fa-ban"></i> Đã hoàn thành </a>
                                                         </li>
                                                         <li>
-                                                            <a href="<?php echo e(route('admin.action.transaction',['cancel', $transaction->id])); ?>" ><i class="fa fa-ban"></i> Huỷ</a>
+                                                            <a href="<?php echo e(route('admin.action.transaction',['cancel', $transaction->id])); ?>" ><i class="fa fa-ban"></i> Huỷ Đơn</a>
                                                         </li>
 
                                                     </ul>
@@ -160,4 +161,4 @@
     <!-- /.content -->
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app_master_admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Lập Trình Web PHP NC\Project_Laravel\web_ban_giay_L9\resources\views/admin/transaction/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app_master_admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\HOC\PHP\xampp\htdocs\Hapi2hand_Finally\resources\views/admin/transaction/index.blade.php ENDPATH**/ ?>

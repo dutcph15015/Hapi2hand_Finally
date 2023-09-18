@@ -28,7 +28,9 @@
                             <option value="">Trạng thái</option>
                             <option value="1" {{ Request::get('status') == 1 ? "selected='selected'" : "" }}>Tiếp nhận</option>
                             <option value="2" {{ Request::get('status') == 2 ? "selected='selected'" : "" }}>Đang vận chuyển</option>
-                            <option value="3" {{ Request::get('status') == 3 ? "selected='selected'" : "" }}>Đã hoàn thành</option>
+
+                            <option value="3" {{ Request::get('status') == 3 ? "selected='selected'" : "" }}>Hoàn thành</option>
+
                             <option value="-1" {{ Request::get('status') == -1 ? "selected='selected'" : "" }}>Huỷ bỏ</option>
                         </select>
                         <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Search</button>
@@ -96,7 +98,15 @@
 
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-success btn-xs">Action</button>
-                                                    <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    @if(
+                                                        $transaction->tst_status==3
+                                                        
+                                                    )
+                                                    <button type="button" disabled class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                        @else
+                                                        <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+
+                                                    @endif
                                                         <span class="caret"></span>
                                                         <span class="sr-only">Toggle Dropdown</span>
                                                     </button>
@@ -104,12 +114,16 @@
                                                         <!-- <li>
                                                             <a href="{{  route('admin.transaction.delete', $transaction->id) }}" class="js-delete-confirm"><i class="fa fa-trash"></i> Delete</a>
                                                         </li> -->
-                                                        <li class="divider"></li>
+
+                                                        <!-- <li class="divider"></li> -->
+
                                                         <li>
                                                             <a href="{{ route('admin.action.transaction',['process', $transaction->id]) }}" ><i class="fa fa-ban"></i> Đang vận chuyển</a>
                                                         </li>
                                                         <li>
-                                                            <a href="{{ route('admin.action.transaction',['success', $transaction->id]) }}" ><i class="fa fa-ban"></i> Đã hoàn thành </a>
+
+                                                            <a href="{{ route('admin.action.transaction',['success', $transaction->id]) }}" ><i class="fa fa-ban"></i> Hoàn thành</a>
+
                                                         </li>
                                                         <li>
                                                             <a href="{{ route('admin.action.transaction',['cancel', $transaction->id]) }}" ><i class="fa fa-ban"></i> Huỷ Đơn</a>
@@ -119,6 +133,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        <!-- {{var_dump($transaction)}} -->
                                     @endforeach
                                 @endif
                             </tbody>
@@ -149,7 +164,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Lưu dữ liệu</button>
                 </div>
             </div>
         <!-- /.modal-content -->
