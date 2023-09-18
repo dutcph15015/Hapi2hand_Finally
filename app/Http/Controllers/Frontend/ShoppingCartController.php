@@ -13,7 +13,7 @@ use App\Mail\TransactionSuccess;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Models\DiscountCode;
-use Illuminate\Support\Facades\Session;
+
 
 class ShoppingCartController extends Controller
 {
@@ -34,17 +34,15 @@ class ShoppingCartController extends Controller
     {
         $product = Product::find($id);
 
-        // //1. Kiểm tra tồn tại sản phẩm
-        // if (!$product) {
-        //     return response()->json(['type' => 'error', 'messages' => 'Sản phẩm không tồn tại']);
-        // }
+        //1. Kiểm tra tồn tại sản phẩm
+        if (!$product) return redirect()->to('/');
 
-      // 2. Kiểm tra số lượng sản phẩm
+        // 2. Kiểm tra số lượng sản phẩm
         if ($product->pro_number < 1) {
-            // 3. Thông báo hết hàng
-            Session::flash('toastr', [
+            //4. Thông báo
+            \Session::flash('toastr', [
                 'type'    => 'error',
-                'message' => 'Sản phẩm đã Hết hàng!'
+                'message' => 'Số lượng sản phẩm không đủ'
             ]);
 
             return redirect()->back();
@@ -63,7 +61,7 @@ class ShoppingCartController extends Controller
                 'image'     => $product->pro_avatar,
                 'size'      => $request->size,
                 'color'      => $request->color,
-                'gender'      => $request->gender,
+                // 'gender'      => $request->gender,
             ]
         ]);
 
@@ -80,6 +78,15 @@ class ShoppingCartController extends Controller
     // thuc hien thanh toan
     public function postPay(Request $request)
     {
+        if (\Cart::count() == 0) {
+            // Nếu giỏ hàng trống, hiển thị thông báo lỗi
+            \Session::flash('toastr', [
+                'type'    => 'error',
+                'message' => 'Giỏ hàng của bạn hiện đang trống.'
+            ]);
+    
+            return redirect()->back();
+        }
         $data = $request->except("_token", 'payment');
         if (!\Auth::user()->id) {
             //4. Thông báo
@@ -116,8 +123,27 @@ class ShoppingCartController extends Controller
                         'od_price'          => $item->price,
                         'od_size'          => $item->options->size,
                         'od_color'          => $item->options->color,
-                        'od_gender'          => $item->options->gender,
+                        // 'od_gender'          => $item->options->gender,
                     ]);
+
+                        // Trừ số lượng sản phẩm
+                        $product = Product::find($item->id);
+
+                        if ($product) {
+                            $remainingQty = $product->pro_number - $item->qty;
+                            if ($remainingQty >= 0) {
+                                // Nếu số lượng còn đủ, trừ số lượng
+                                $product->update(['pro_number' => $remainingQty]);
+                            } else {
+                                // Xử lý trường hợp số lượng không đủ
+                                \Session::flash('toastr', [
+                                    'type'    => 'error',
+                                    'message' => 'Sản phẩm ' . $product->pro_name . ' đã hết hàng.'
+                                ]);
+                                \Cart::destroy();
+                                return redirect()->back();
+                            }
+                        }
 
                     //Tăng pay ( số lượt mua của sản phẩm dó)
                     // \DB::table('products')
@@ -180,7 +206,7 @@ class ShoppingCartController extends Controller
             return response([
                 'totalMoney' => \Cart::subtotal(0),
                 'type'       => 'success',
-                'messages'    => 'Xoá sản phẩm khỏi giỏ hàng thành công'
+                'message'    => 'Xoá sản phẩm khỏi đơn hàng thành công'
             ]);
         }
     }
@@ -191,20 +217,11 @@ class ShoppingCartController extends Controller
         {
             $discount = DiscountCode::where('d_code', $request->discount_code)->first();
 
-            try {
-                if ($discount->d_number_code < 1) {                       
-                    return response([
-                        'totalMoney'  => \Cart::subtotal(0),
-                        'type' => 'error',
-                        'messages'    => 'Số lượng mã giảm giá đã hết!'
-                    ]);
-                }
-            } catch (\Exception $e) {
-                // Xử lý trường hợp không tìm thấy mã giảm giá         
+            if ($discount->d_number_code == 0) {
                 return response([
-                    'totalMoney'  => \Cart::subtotal(0),
-                    'type' => 'error',
-                    'messages'    => 'Mã giảm giá không tồn tại!'
+                    'totalMoney' => \Cart::subtotal(0),
+                    'type'       => 'errors',
+                    'message'    => 'Số lượng mã giảm giá đã hết'
                 ]);
             }
 
@@ -216,7 +233,7 @@ class ShoppingCartController extends Controller
             return response([
                 'totalMoney' => \Cart::subtotal(0),
                 'type'       => 'success',
-                'messages'    => 'Áp mã giảm giá thành công!'
+                'message'    => ''
             ]);
         }
     }
@@ -274,8 +291,8 @@ class ShoppingCartController extends Controller
 
         $vnp_Url = env('VNP_URL') . "?" . $query;
         if (env('VNP_HASH_SECRET')) {
-            $vnpSecureHash = hash('sha256', env('VNP_HASH_SECRET') . $hashdata);
-            $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
+            $vnpSecureHash = hash_hmac('sha512', $hashdata ,env('VNP_HASH_SECRET'));
+            $vnp_Url .= 'vnp_SecureHashType=SHA512&vnp_SecureHash=' . $vnpSecureHash;
         }
 
         return redirect($vnp_Url);
@@ -292,7 +309,7 @@ class ShoppingCartController extends Controller
 
                 if ($transactionID) {
                     $shopping = \Cart::content();
-                    Mail::to($request->tst_email)->send(new TransactionSuccess($shopping));
+                    //Mail::to($request->tst_email)->send(new TransactionSuccess($shopping));
 
                     foreach ($shopping as $key => $item) {
 
@@ -305,7 +322,7 @@ class ShoppingCartController extends Controller
                             'od_price'          => $item->price,
                             'od_size'          => $item->options->size,
                             'od_color'          => $item->options->color,
-                            'od_gender'          => $item->options->gender,
+                            // 'od_gender'          => $item->options->gender,
                         ]);
 
                         //Tăng pay ( số lượt mua của sản phẩm dó)
