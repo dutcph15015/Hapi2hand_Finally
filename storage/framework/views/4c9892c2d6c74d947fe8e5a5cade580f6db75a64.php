@@ -12,9 +12,14 @@
         margin-top: 10px !important;
         margin-bottom: 10px !important;
     }
+
 </style>
 <form role="form" action="" method="POST" enctype="multipart/form-data">
     <?php echo csrf_field(); ?>
+    <?php if(isset($error)): ?>
+    <?php echo e(var_dump($error)); ?>
+
+    <?php endif; ?>
     <div class="col-sm-8">
         <div class="box box-warning">
             <div class="box-header with-border">
@@ -22,7 +27,7 @@
             </div>
             <div class="box-body">
                 <div class="form-group ">
-                    <label for="exampleInputEmail1">Tên <b class="col-red">(*)</b></label>
+                    <label for="exampleInputEmail1">Tên</label>
                     <input type="text" class="form-control" name="pro_name" placeholder="Name ...." autocomplete="off" value="<?php echo e($product->pro_name ?? old('pro_name')); ?>">
                     <?php if($errors->first('pro_name')): ?>
                         <span class="text-danger"><?php echo e($errors->first('pro_name')); ?></span>
@@ -31,8 +36,8 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Giá sản phẩm</label>
-                             <input type="text" name="pro_price" value="<?php echo e(old('pro_price', isset($product->pro_price) ? $product->pro_price : 0)); ?>" class="form-control" data-type="currency" placeholder="15.000.000">
+                            <label for="exampleInputEmail1">Giá sản phẩm (đ)</label>
+                             <input type="number" name="pro_price" value="<?php echo e(old('pro_price', isset($product->pro_price) ? $product->pro_price : 0)); ?>" class="form-control" data-type="currency" placeholder="15.000.000">
                              <?php if($errors->first('pro_price')): ?>
                                 <span class="text-danger"><?php echo e($errors->first('pro_price')); ?></span>
                             <?php endif; ?>
@@ -40,8 +45,20 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Giảm giá</label>
+                            <label for="exampleInputEmail1">Giảm giá (%)</label>
                              <input type="number" name="pro_sale" value="<?php echo e(old('pro_sale', isset($product->pro_sale) ? $product->pro_sale : 0)); ?>" class="form-control" data-type="currency" placeholder="5">
+                             <?php if($errors->first('pro_sale')): ?>
+                                <span class="text-danger"><?php echo e($errors->first('pro_sale')); ?></span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="box-body" style="padding: 0px;">
+                        <div class="form-group col-sm-12">
+                            <label for="">Số lượng</label>
+                            <input type="number"  class="form-control" name="pro_number" value="<?php echo e($product->pro_number ?? old('pro_number',0)); ?>" placeholder="10">
+                            <?php if($errors->first('pro_number')): ?>
+                                <span class="text-danger"><?php echo e($errors->first('pro_number')); ?></span>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="col-sm-12">
@@ -66,7 +83,7 @@
                 </div>
 
                 <div class="form-group ">
-                    <label class="control-label">Danh mục <b class="col-red">(*)</b></label>
+                    <label class="control-label">Danh mục</label>
                     <select name="pro_category_id" class="form-control ">
                         <option value="">__Click__</option>
                         <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -153,21 +170,6 @@
                 
             
             
-            <div class="box-body" style="padding: 0px;">
-                <div class="form-group col-sm-6">
-                    <label for="exampleInputEmail1">Xuất sứ</label>
-                    <select name="pro_country" class="form-control ">
-                        <option value="0">__Click__</option>
-                        <?php $__currentLoopData = $producer; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value="<?php echo e($item->id); ?>" <?php echo e(($product->pro_country ?? '' ) == $item->id ? "selected='selected'" : ""); ?>><?php echo e($item->pdr_name); ?></option>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </select>
-                </div>
-                <div class="form-group col-sm-6">
-                    <label for="">Số lượng</label>
-                    <input type="number"  class="form-control" name="pro_number" value="<?php echo e($product->pro_number ?? old('pro_number',0)); ?>" placeholder="10">
-                </div>
-            </div>
         </div>
         <div class="box box-warning">
             <div class="box-header with-border">
