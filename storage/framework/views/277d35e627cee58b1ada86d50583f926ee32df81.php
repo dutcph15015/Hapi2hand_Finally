@@ -26,9 +26,6 @@
                         </select>
 
                         <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Tìm kiếm</button>
-                        <button type="submit" name="export" value="true" class="btn btn-info">
-                            <i class="fa fa-save"></i> Export
-                        </button>
                         <a href="<?php echo e(route('admin.product.create')); ?>" class="btn btn-primary">Thêm mới <i class="fa fa-plus"></i></a>
                     </form>
                 </div>
@@ -80,7 +77,7 @@
                                                     <a href="<?php echo e(route('admin.product.hot', $product->id)); ?>" class="label label-default">None</a>
                                                 <?php endif; ?>
                                             </td>
-                                            <td><?php echo e(($product->pro_number - $product->pro_pay) > 0 ? $product->pro_number - $product->pro_pay : 0); ?></td>
+                                            <td><?php echo e($product->pro_number); ?></td>
                                             <td>
                                                 <?php if($product->pro_active == 1): ?>
                                                     <a href="<?php echo e(route('admin.product.active', $product->id)); ?>" class="label label-info">Active</a>
@@ -91,7 +88,6 @@
                                             <td><?php echo e($product->created_at); ?></td>
                                             <td>
                                                 <a href="<?php echo e(route('admin.product.update', $product->id)); ?>" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-                                                <a href="<?php echo e(route('admin.product.delete', $product->id)); ?>" class="btn btn-xs btn-danger js-delete-confirm"><i class="fa fa-trash"></i> Delete</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

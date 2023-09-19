@@ -30,7 +30,7 @@ class AdminStatisticalController extends Controller
 
         $endDateObj = new \DateTime($endDate);
         $endDateObj->modify('+1 day');
-        $endDate = $endDateObj->format('Y-m-d');
+        $endDateFilter = $endDateObj->format('Y-m-d');
 
         //Tổng hđơn hàng
         $totalTransactions = \DB::table('transactions')->select('id')->count();
@@ -47,8 +47,7 @@ class AdminStatisticalController extends Controller
 
         // Danh sách đơn hàng
         $transactions = Transaction::orderByDesc('id')
-                        ->whereBetween('created_at', [$startDate, $endDate])
-                        ->limit(10)
+                        ->whereBetween('created_at', [$startDate, $endDateFilter])
                         ->get();
         // Top sản phẩm xem nhiều
         $topViewProducts = Product::orderByDesc('pro_view')
@@ -57,19 +56,19 @@ class AdminStatisticalController extends Controller
 
         // Top sản phẩm mua nhiều
         $topPayProducts = Product::orderByDesc('pro_pay')
-            ->whereBetween('created_at', [$startDate, $endDate])
+            ->whereBetween('created_at', [$startDate, $endDateFilter])
             ->limit(10)
             ->get();
 
         // Thống kê trạng thái đơn hàng
         // Tiep nhan
-        $transactionDefault = Transaction::where('tst_status',1)->whereBetween('created_at', [$startDate, $endDate])->select('id')->count();
+        $transactionDefault = Transaction::where('tst_status',1)->whereBetween('created_at', [$startDate, $endDateFilter])->select('id')->count();
         // dang van chuyen
-        $transactionProcess = Transaction::where('tst_status',2)->whereBetween('created_at', [$startDate, $endDate])->select('id')->count();
+        $transactionProcess = Transaction::where('tst_status',2)->whereBetween('created_at', [$startDate, $endDateFilter])->select('id')->count();
         // Thành công
-        $transactionSuccess = Transaction::where('tst_status',3)->whereBetween('created_at', [$startDate, $endDate])->select('id')->count();
+        $transactionSuccess = Transaction::where('tst_status',3)->whereBetween('created_at', [$startDate, $endDateFilter])->select('id')->count();
         //Cancel
-        $transactionCancel = Transaction::where('tst_status',-1)->whereBetween('created_at', [$startDate, $endDate])->select('id')->count();
+        $transactionCancel = Transaction::where('tst_status',-1)->whereBetween('created_at', [$startDate, $endDateFilter])->select('id')->count();
 
         $statusTransaction = [
             [
@@ -107,14 +106,14 @@ class AdminStatisticalController extends Controller
 
         //Doanh thu theo tháng ứng với trạng thái đã xử lý
         $revenueTransactionMonth = Transaction::where('tst_status',3)
-            ->whereBetween('created_at', [$startDate, $endDate])
+            ->whereBetween('created_at', [$startDate, $endDateFilter])
             ->select(\DB::raw('sum(tst_total_money) as totalMoney'), \DB::raw('DATE(created_at) day'))
             ->groupBy('day')
             ->get()->toArray();
 
         //Doanh thu theo tháng ứng với trạng thái tiếp nhận
         $revenueTransactionMonthDefault = Transaction::where('tst_status',1)
-            ->whereBetween('created_at', [$startDate, $endDate])
+            ->whereBetween('created_at', [$startDate, $endDateFilter])
             ->select(\DB::raw('sum(tst_total_money) as totalMoney'), \DB::raw('DATE(created_at) day'))
             ->groupBy('day')
             ->get()->toArray();
@@ -124,7 +123,7 @@ class AdminStatisticalController extends Controller
         foreach($listDay as $index => $day) {
             $total = 0;
             foreach ($revenueTransactionMonth as $key => $revenue) {
-                if ($revenue['day'] <=  $day && $revenue['day'] > $listDay[$index-1]) {
+                if ($revenue['day'] <=  $day && (!isset($listDay[$index-1]) || $revenue['day'] > $listDay[$index-1])) {
                     $total += $revenue['totalMoney'];
                 }
                 if ($revenue['day'] > $day) {

@@ -100,6 +100,7 @@ class ShoppingCartController extends Controller
         $data['tst_user_id'] = \Auth::user()->id;$data['tst_user_id'] = \Auth::user()->id;
         $data['tst_total_money'] = str_replace(',', '', \Cart::subtotal(0));
         $data['created_at']      = Carbon::now();
+        $data['updated_at']      = Carbon::now();
 
         if ($request->payment == 2) {
             $totalMoney = str_replace(',', '', \Cart::subtotal(0));

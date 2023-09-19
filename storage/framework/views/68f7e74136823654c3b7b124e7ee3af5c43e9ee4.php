@@ -151,7 +151,6 @@
                         <li><a href="<?php echo e(route('admin.slide.index')); ?>"><i class="fa fa-circle-o text-red"></i> <span>Slide</span></a></li>
                         <li><a href="<?php echo e(route('admin.event.index')); ?>"><i class="fa fa-circle-o text-red"></i> <span>Sự kiện</span></a></li>
                         <li><a href="<?php echo e(route('admin.static.index')); ?>"><i class="fa fa-circle-o text-red"></i> <span>Trang tĩnh</span></a></li>
-                        <li><a href="<?php echo e(route('admin.statistical')); ?>"><i class="fa fa-circle-o text-red"></i> <span>Thống kê</span></a></li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->

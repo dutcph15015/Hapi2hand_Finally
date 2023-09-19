@@ -26,7 +26,6 @@
                                     <th>Tên danh mục</th>
                                     <th>Ảnh</th>
                                     <th>Trạng thái</th>
-                                    <th>Hiển thị</th>
                                     <th>Ngày tạo</th>
                                     <th>Hành động</th>
                                 </tr>
@@ -44,13 +43,6 @@
                                                     <a href="<?php echo e(route('admin.category.active', $category->id)); ?>" class="label label-info">Hiển thị</a>
                                                 <?php else: ?>
                                                     <a href="<?php echo e(route('admin.category.active', $category->id)); ?>" class="label label-default">Ẩn</a>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td>
-                                                <?php if($category->c_hot == 1): ?>
-                                                    <a href="<?php echo e(route('admin.category.hot', $category->id)); ?>" class="label label-info">Hiển thị</a>
-                                                <?php else: ?>
-                                                    <a href="<?php echo e(route('admin.category.hot', $category->id)); ?>" class="label label-default">Ẩn</a>
                                                 <?php endif; ?>
                                             </td>
                                             <td><?php echo e($category->created_at); ?></td>

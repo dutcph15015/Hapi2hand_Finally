@@ -7,7 +7,6 @@
             <th>Giá</th>
             <th>Số lượng</th>
             <th>Tổng tiền</th>
-            <!-- <th>Hành động</th> -->
         </tr>
         <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr>
@@ -29,12 +28,6 @@
                         <?php endif; ?>
                     </span>
                     <br>
-                    <!-- <span>
-                        <?php if($item->od_color): ?>
-                            Giới tính : <?php echo e($item->od_gender == 1 ? 'Nam' :  'Nữ'); ?>
-
-                        <?php endif; ?>
-                    </span> -->
                 </td>
                 <td>
                     <img alt="" style="width: 60px;height: 80px" src="<?php echo e(pare_url_file($item->product->pro_avatar ?? "")); ?>" class="lazyload">
@@ -42,9 +35,6 @@
                 <td><?php echo e(number_format($item->od_price,0,',','.')); ?> đ</td>
                 <td><?php echo e($item->od_qty); ?></td>
                 <td><?php echo e(number_format($item->od_price * $item->od_qty,0,',','.')); ?> đ</td>
-                <!-- <td>
-                    <a href="<?php echo e(route('ajax_admin.transaction.order_item', $item->id)); ?>" class="btn btn-xs btn-danger js-delete-order-item">Delete</a>
-                </td> -->
             </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </tbody>
