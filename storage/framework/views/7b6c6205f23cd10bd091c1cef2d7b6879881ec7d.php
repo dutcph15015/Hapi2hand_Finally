@@ -75,10 +75,9 @@
                                                     <ul>
                                                         <li>Ngân hàng: <?php echo e($transaction->payment->p_code_bank); ?></li>
                                                         <li>Mã thanh toán: <?php echo e($transaction->p_code_vnpay); ?></li>
-                                                        <li>Tổng tiền:  <?php echo e(number_format($transaction->payment->p_money / 100,0,',','.')); ?> VNĐ</li>
+                                                        <li>Tổng tiền:  <?php echo e(number_format($transaction->payment->p_money / 1,0,',','.')); ?> VNĐ</li>
                                                         <li>Nội dung: <?php echo e($transaction->payment->p_note); ?></li>
-                                                        <li>Thời gian: <?php echo e(date('Y-m-d H:i', strtotime($transaction->payment->p_time))); ?></li>
-
+                                                        <li>Thời gian: <?php echo e(date('d-m-Y H:i', strtotime($transaction->payment->p_time))); ?></li>
                                                     </ul>
                                                 <?php else: ?>
                                                     Thanh toán khi nhận hàng
@@ -90,7 +89,7 @@
 
                                                 </span>
                                             </td>
-                                            <td><?php echo e($transaction->created_at); ?></td>
+                                            <td><?php echo e(date('d-m-Y H:i', strtotime($transaction->created_at))); ?></td>
                                             <td>
                                                 <a data-id="<?php echo e($transaction->id); ?>" href="<?php echo e(route('ajax.admin.transaction.detail', $transaction->id)); ?>" class="btn btn-xs btn-info js-preview-transaction"><i class="fa fa-eye"></i> View</a>
 

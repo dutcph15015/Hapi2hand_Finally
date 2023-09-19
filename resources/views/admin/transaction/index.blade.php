@@ -76,10 +76,9 @@
                                                     <ul>
                                                         <li>Ngân hàng: {{ $transaction->payment->p_code_bank }}</li>
                                                         <li>Mã thanh toán: {{ $transaction->p_code_vnpay }}</li>
-                                                        <li>Tổng tiền:  {{ number_format($transaction->payment->p_money / 100,0,',','.') }} VNĐ</li>
+                                                        <li>Tổng tiền:  {{ number_format($transaction->payment->p_money / 1,0,',','.') }} VNĐ</li>
                                                         <li>Nội dung: {{ $transaction->payment->p_note }}</li>
-                                                        <li>Thời gian: {{ date('Y-m-d H:i', strtotime($transaction->payment->p_time)) }}</li>
-
+                                                        <li>Thời gian: {{ date('d-m-Y H:i', strtotime($transaction->payment->p_time)) }}</li>
                                                     </ul>
                                                 @else
                                                     Thanh toán khi nhận hàng
@@ -90,7 +89,7 @@
                                                     {{ $transaction->getStatus($transaction->tst_status)['name'] }}
                                                 </span>
                                             </td>
-                                            <td>{{  $transaction->created_at }}</td>
+                                            <td>{{ date('d-m-Y H:i', strtotime($transaction->created_at))}}</td>
                                             <td>
                                                 <a data-id="{{  $transaction->id }}" href="{{ route('ajax.admin.transaction.detail', $transaction->id) }}" class="btn btn-xs btn-info js-preview-transaction"><i class="fa fa-eye"></i> View</a>
 
