@@ -111,7 +111,7 @@ class ShoppingCartController extends Controller
             $transactionID           = Transaction::insertGetId($data);
             if ($transactionID) {
                 $shopping = \Cart::content();
-                // Mail::to($request->tst_email)->send(new TransactionSuccess($shopping));
+                Mail::to($request->tst_email)->send(new TransactionSuccess($shopping));
 
                 foreach ($shopping as $key => $item) {
 
@@ -310,7 +310,7 @@ class ShoppingCartController extends Controller
 
                 if ($transactionID) {
                     $shopping = \Cart::content();
-                    //Mail::to($request->tst_email)->send(new TransactionSuccess($shopping));
+                    Mail::to($request->tst_email)->send(new TransactionSuccess($shopping));
 
                     foreach ($shopping as $key => $item) {
 
@@ -347,6 +347,7 @@ class ShoppingCartController extends Controller
                         'p_time' => date('Y-m-d H:i', strtotime($vnpayData['vnp_PayDate'])),
                     ];
                     Payment::insert($dataPayment);
+                    dd(111);
                 }
 
                 \Session::flash('toastr', [

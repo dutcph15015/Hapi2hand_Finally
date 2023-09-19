@@ -47,7 +47,7 @@
         <div class="item__content ratings">
             <ul>
                 <?php for($i = 5 ; $i >0 ; $i--): ?>
-                    <li class="<?php echo e(Request::get('rv') == $i ? "active" : ""); ?>">
+                    <li class="js-param-search <?php echo e(Request::get('rv') == $i ? "active" : ""); ?>" data-param="rv=<?php echo e($i); ?>">
                         <a href="<?php echo e(request()->fullUrlWithQuery(['rv'=> $i])); ?>">
                             <span>
                                 <?php for($j = 1 ; $j <= 5 ; $j ++): ?>

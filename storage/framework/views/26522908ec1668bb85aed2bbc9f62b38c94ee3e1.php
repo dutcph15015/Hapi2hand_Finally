@@ -8,7 +8,7 @@
         <div style="width: 50%"></div>
     </div>
     <div style="background: white;padding: 15px;border:1px solid #dedede;">
-        <h2 style="margin:10px 0;border-bottom: 1px solid #dedede;padding-bottom: 10px;">Danh sách sản phẩm bạn đã mua</h2>
+        <h2 style="margin:10px 0;border-bottom: 1px solid #dedede;padding-bottom: 10px;">Danh sách sản phẩm bạn đã đặt</h2>
         <div>
             <?php $__currentLoopData = $shopping; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div style="border-bottom: 1px solid #dedede;padding-bottom: 10px;padding-top: 10px;">
@@ -29,8 +29,9 @@
                     </div>
                     <div style="clear: both;"></div>
                 </div>
+                <p>Ngày đặt hàng: <?php echo e(date('d-m-Y H:i')); ?></p>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            <h2>Tổng tiền : <b><?php echo e(\Cart::subtotal(0)); ?></b></h2>
+            <h2>Tổng tiền thanh toán: <b><?php echo e(\Cart::subtotal(0)); ?></b></h2>
         </div>
         <div>
             <p>Đây là email tự động xin vui không không trả lời vào email này</p>
@@ -38,7 +39,7 @@
         </div>
     </div>
     <div style="background: #f4f5f5;box-sizing: border-box;padding: 15px">
-        <p style="margin:2px 0;color: #333">Email : admin@gmail.com</p>
+        <p style="margin:2px 0;color: #333">Email : admin.hapi2hand@gmail.com</p>
         <p style="margin:2px 0;color: #333">Phone : 0559518488</p>
     </div>
 </div><?php /**PATH D:\ADMIN\web_ban_giay_L9\web_ban_giay_Hapi2hand_Finally\resources\views/emails/email_success_transaction.blade.php ENDPATH**/ ?>
