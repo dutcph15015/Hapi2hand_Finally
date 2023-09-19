@@ -106,7 +106,9 @@
                     <li>
                         <a href="<?php echo e(route('get.category.list', $item->c_slug.'-'.$item->id)); ?>"
                            title="<?php echo e($item->c_name); ?>" class="js-open-menu">
-                            <img src="<?php echo e(pare_url_file($item->c_avatar)); ?>" alt="<?php echo e($item->c_name); ?>">
+                            <?php if(isset($item->c_avatar)): ?>
+                                <img src="<?php echo e(pare_url_file($item->c_avatar)); ?>" alt="<?php echo e($item->c_name); ?>">
+                            <?php endif; ?>
                             <span><?php echo e($item->c_name); ?></span>
                             <?php if(isset($item->children) && count($item->children)): ?>
                                 <span class="fa fa-angle-right"></span>

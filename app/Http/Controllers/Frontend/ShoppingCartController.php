@@ -110,7 +110,7 @@ class ShoppingCartController extends Controller
             $transactionID           = Transaction::insertGetId($data);
             if ($transactionID) {
                 $shopping = \Cart::content();
-                // Mail::to($request->tst_email)->send(new TransactionSuccess($shopping));
+                Mail::to($request->tst_email)->send(new TransactionSuccess($shopping));
 
                 foreach ($shopping as $key => $item) {
 
@@ -325,6 +325,24 @@ class ShoppingCartController extends Controller
                             // 'od_gender'          => $item->options->gender,
                         ]);
 
+                               // Trừ số lượng sản phẩm
+                               $product = Product::find($item->id);
+
+                               if ($product) {
+                                   $remainingQty = $product->pro_number - $item->qty;
+                                   if ($remainingQty >= 0) {
+                                       // Nếu số lượng còn đủ, trừ số lượng
+                                       $product->update(['pro_number' => $remainingQty]);
+                                   } else {
+                                       // Xử lý trường hợp số lượng không đủ
+                                       \Session::flash('toastr', [
+                                           'type'    => 'error',
+                                           'message' => 'Sản phẩm ' . $product->pro_name . ' đã hết hàng.'
+                                       ]);
+                                       \Cart::destroy();
+                                       return redirect()->back();
+                                   }
+                               }
                         //Tăng pay ( số lượt mua của sản phẩm dó)
                         // \DB::table('products')
                         //     ->where('id', $item->id)

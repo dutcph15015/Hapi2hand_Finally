@@ -28,12 +28,13 @@
                             <option value="">Trạng thái</option>
                             <option value="1" {{ Request::get('status') == 1 ? "selected='selected'" : "" }}>Tiếp nhận</option>
                             <option value="2" {{ Request::get('status') == 2 ? "selected='selected'" : "" }}>Đang vận chuyển</option>
-
-                            <option value="3" {{ Request::get('status') == 3 ? "selected='selected'" : "" }}>Hoàn thành</option>
-
+                            <option value="3" {{ Request::get('status') == 3 ? "selected='selected'" : "" }}>Đã hoàn thành</option>
                             <option value="-1" {{ Request::get('status') == -1 ? "selected='selected'" : "" }}>Huỷ bỏ</option>
                         </select>
                         <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Search</button>
+                        <button type="submit" name="export" value="true" class="btn btn-info">
+                            <i class="fa fa-save"></i> Export
+                        </button>
                     </form>
                 </div>
                 <div class="box-body">
@@ -48,7 +49,6 @@
                                     <th>Phương thức thanh toán</th>
                                     <th>Trạng thái</th>
                                     <th>Ngày tạo</th>
-                                    <th>Ngày cập nhật</th>
                                     <th>Hành động</th>
                                 </tr>
                                 @if (isset($transactions))
@@ -75,11 +75,10 @@
                                                 @if ($transaction->payment)
                                                     <ul>
                                                         <li>Ngân hàng: {{ $transaction->payment->p_code_bank }}</li>
-                                                        <li>Mã thanh toán: {{ $transaction->p_code_vnpay }}</li>
-                                                        <li>Tổng tiền:  {{ number_format($transaction->payment->p_money / 100,0,',','.') }} VNĐ</li>
+                                                        <li>Mã thanh toán: {{ $transaction->payment->p_transaction_code }}</li>
+                                                        <li>Tổng tiền:  {{ number_format($transaction->payment->p_money / 1,0,',','.') }} VNĐ</li>
                                                         <li>Nội dung: {{ $transaction->payment->p_note }}</li>
-                                                        <li>Thời gian: {{ date('Y-m-d H:i', strtotime($transaction->payment->p_time)) }}</li>
-
+                                                        <li>Thời gian: {{ date('d-m-Y H:i', strtotime($transaction->payment->p_time)) }}</li>
                                                     </ul>
                                                 @else
                                                     Thanh toán khi nhận hàng
@@ -90,8 +89,7 @@
                                                     {{ $transaction->getStatus($transaction->tst_status)['name'] }}
                                                 </span>
                                             </td>
-                                            <td>{{  $transaction->created_at }}</td>
-                                            <td>{{  $transaction->updated_at }}</td>
+                                            <td>{{ date('d-m-Y H:i', strtotime($transaction->created_at))}}</td>
                                             <td>
                                                 <a data-id="{{  $transaction->id }}" href="{{ route('ajax.admin.transaction.detail', $transaction->id) }}" class="btn btn-xs btn-info js-preview-transaction"><i class="fa fa-eye"></i> View</a>
 
@@ -153,6 +151,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Lưu dữ liệu</button>
                 </div>
             </div>
         <!-- /.modal-content -->

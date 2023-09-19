@@ -2,7 +2,7 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Trang quản trị hệ thống website xây dựng website bán hàng</h1>
+        <h1>Trang quản trị hệ thống website bán giày Hapi2hand</h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         </ol>

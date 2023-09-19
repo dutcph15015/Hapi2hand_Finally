@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('css'); ?>
     <style>
 		<?php $style = file_get_contents('css/user.min.css');echo $style;?>
