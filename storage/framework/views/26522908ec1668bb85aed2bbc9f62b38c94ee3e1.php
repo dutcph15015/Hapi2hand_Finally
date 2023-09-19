@@ -8,7 +8,7 @@
         <div style="width: 50%"></div>
     </div>
     <div style="background: white;padding: 15px;border:1px solid #dedede;">
-        <h2 style="margin:10px 0;border-bottom: 1px solid #dedede;padding-bottom: 10px; text-align: center;">Danh sách sản phẩm bạn đã đặt</h2>
+        <h2 style="margin:10px 0;border-bottom: 1px solid #dedede;padding-bottom: 10px; text-align: center;">Danh Sách Sản Phẩm Bạn Đã Đặt</h2>
         <div>
             <?php $__currentLoopData = $shopping; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div style="border-bottom: 1px solid #dedede;padding-bottom: 10px;padding-top: 10px;">
