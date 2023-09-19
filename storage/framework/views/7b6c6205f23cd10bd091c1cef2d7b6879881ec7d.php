@@ -28,12 +28,13 @@
                             <option value="">Trạng thái</option>
                             <option value="1" <?php echo e(Request::get('status') == 1 ? "selected='selected'" : ""); ?>>Tiếp nhận</option>
                             <option value="2" <?php echo e(Request::get('status') == 2 ? "selected='selected'" : ""); ?>>Đang vận chuyển</option>
-
-                            <option value="3" <?php echo e(Request::get('status') == 3 ? "selected='selected'" : ""); ?>>Hoàn thành</option>
-
+                            <option value="3" <?php echo e(Request::get('status') == 3 ? "selected='selected'" : ""); ?>>Đã hoàn thành</option>
                             <option value="-1" <?php echo e(Request::get('status') == -1 ? "selected='selected'" : ""); ?>>Huỷ bỏ</option>
                         </select>
                         <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Search</button>
+                        <button type="submit" name="export" value="true" class="btn btn-info">
+                            <i class="fa fa-save"></i> Export
+                        </button>
                     </form>
                 </div>
                 <div class="box-body">
@@ -48,7 +49,6 @@
                                     <th>Phương thức thanh toán</th>
                                     <th>Trạng thái</th>
                                     <th>Ngày tạo</th>
-                                    <th>Ngày cập nhật</th>
                                     <th>Hành động</th>
                                 </tr>
                                 <?php if(isset($transactions)): ?>
@@ -75,7 +75,7 @@
                                                 <?php if($transaction->payment): ?>
                                                     <ul>
                                                         <li>Ngân hàng: <?php echo e($transaction->payment->p_code_bank); ?></li>
-                                                        <li>Mã thanh toán: <?php echo e($transaction->p_code_vnpay); ?></li>
+                                                        <li>Mã thanh toán: <?php echo e($transaction->payment->p_transaction_code); ?></li>
                                                         <li>Tổng tiền:  <?php echo e(number_format($transaction->payment->p_money / 1,0,',','.')); ?> VNĐ</li>
                                                         <li>Nội dung: <?php echo e($transaction->payment->p_note); ?></li>
                                                         <li>Thời gian: <?php echo e(date('d-m-Y H:i', strtotime($transaction->payment->p_time))); ?></li>
@@ -91,7 +91,6 @@
                                                 </span>
                                             </td>
                                             <td><?php echo e(date('d-m-Y H:i', strtotime($transaction->created_at))); ?></td>
-                                            <td><?php echo e(date('d-m-Y H:i', strtotime($transaction->updated_at))); ?></td>
                                             <td>
                                                 <a data-id="<?php echo e($transaction->id); ?>" href="<?php echo e(route('ajax.admin.transaction.detail', $transaction->id)); ?>" class="btn btn-xs btn-info js-preview-transaction"><i class="fa fa-eye"></i> View</a>
 
@@ -154,6 +153,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Lưu dữ liệu</button>
                 </div>
             </div>
         <!-- /.modal-content -->
@@ -162,5 +162,4 @@
     </div>
     <!-- /.content -->
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('layouts.app_master_admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\ADMIN\web_ban_giay_L9\web_ban_giay_Hapi2hand_Finally\resources\views/admin/transaction/index.blade.php ENDPATH**/ ?>
