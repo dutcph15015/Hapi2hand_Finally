@@ -21,18 +21,6 @@
                         </li>
                     </ul>
                 </div>
-                <div class="filter-tab">
-                    <ul>
-                        <?php for($i = 1; $i <= 6; $i++): ?>
-                            <li class="<?php echo e(Request::get('price') == $i ? "active" : ""); ?>">
-                                <a href="<?php echo e(request()->fullUrlWithQuery(['price' =>  $i])); ?>">
-                                    <?php echo e($i == 6 ? "Lớn hơn 10 triệu" : "Giá nhỏ hơn " . $i * 2  ." triệu"); ?>
-
-                                </a>
-                            </li>
-                        <?php endfor; ?>
-                    </ul>
-                </div>
                 
                 <div class="order-tab">
                     <span class="total-prod">Tổng số: <?php echo e($products->total()); ?> sản phẩm</span>
@@ -42,6 +30,8 @@
                             <ul>
                                 <li><a class="<?php echo e(Request::get('sort') == 'desc' ? "active" : ""); ?>" href="<?php echo e(request()->fullUrlWithQuery(['sort'=> 'desc'])); ?>">Mới nhất</a></li>
                                 <li><a class="<?php echo e(Request::get('sort') == 'asc' ? "active" : ""); ?>" href="<?php echo e(request()->fullUrlWithQuery(['sort'=> 'asc'])); ?>">Cũ nhất</a></li>
+                                <li><a class="<?php echo e(Request::get('sort') == 'price_desc' ? "active" : ""); ?>" href="<?php echo e(request()->fullUrlWithQuery(['sort'=> 'price_desc'])); ?>">Giá giảm dần</a></li>
+                                <li><a class="<?php echo e(Request::get('sort') == 'price_asc' ? "active" : ""); ?>" href="<?php echo e(request()->fullUrlWithQuery(['sort'=> 'price_asc'])); ?>">giá tăng dần</a></li>
                             </ul>
                         </div>
                     </div>

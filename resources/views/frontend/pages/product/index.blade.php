@@ -21,17 +21,6 @@
                         </li>
                     </ul>
                 </div>
-                <div class="filter-tab">
-                    <ul>
-                        @for($i = 1; $i <= 6; $i++)
-                            <li class="{{ Request::get('price') == $i ? "active" : "" }}">
-                                <a href="{{ request()->fullUrlWithQuery(['price' =>  $i]) }}">
-                                    {{  $i == 6 ? "Lớn hơn 10 triệu" : "Giá nhỏ hơn " . $i * 2  ." triệu" }}
-                                </a>
-                            </li>
-                        @endfor
-                    </ul>
-                </div>
                 {{-- {{  dd($products) }} --}}
                 <div class="order-tab">
                     <span class="total-prod">Tổng số: {{ $products->total() }} sản phẩm</span>
@@ -41,6 +30,8 @@
                             <ul>
                                 <li><a class="{{ Request::get('sort') == 'desc' ? "active" : "" }}" href="{{ request()->fullUrlWithQuery(['sort'=> 'desc']) }}">Mới nhất</a></li>
                                 <li><a class="{{ Request::get('sort') == 'asc' ? "active" : "" }}" href="{{ request()->fullUrlWithQuery(['sort'=> 'asc']) }}">Cũ nhất</a></li>
+                                <li><a class="{{ Request::get('sort') == 'price_desc' ? "active" : "" }}" href="{{ request()->fullUrlWithQuery(['sort'=> 'price_desc']) }}">Giá giảm dần</a></li>
+                                <li><a class="{{ Request::get('sort') == 'price_asc' ? "active" : "" }}" href="{{ request()->fullUrlWithQuery(['sort'=> 'price_asc']) }}">giá tăng dần</a></li>
                             </ul>
                         </div>
                     </div>

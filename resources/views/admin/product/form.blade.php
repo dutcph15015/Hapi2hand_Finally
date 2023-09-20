@@ -12,9 +12,13 @@
         margin-top: 10px !important;
         margin-bottom: 10px !important;
     }
+
 </style>
 <form role="form" action="" method="POST" enctype="multipart/form-data">
     @csrf
+    @if (isset($error))
+    {{var_dump($error);}}
+    @endif
     <div class="col-sm-8">
         <div class="box box-warning">
             <div class="box-header with-border">
@@ -22,7 +26,7 @@
             </div>
             <div class="box-body">
                 <div class="form-group ">
-                    <label for="exampleInputEmail1">Tên <b class="col-red">(*)</b></label>
+                    <label for="exampleInputEmail1">Tên</label>
                     <input type="text" class="form-control" name="pro_name" placeholder="Name ...." autocomplete="off" value="{{  $product->pro_name ?? old('pro_name') }}">
                     @if ($errors->first('pro_name'))
                         <span class="text-danger">{{ $errors->first('pro_name') }}</span>
@@ -31,8 +35,8 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Giá sản phẩm</label>
-                             <input type="text" name="pro_price" value="{{  old('pro_price', isset($product->pro_price) ? $product->pro_price : 0) }}" class="form-control" data-type="currency" placeholder="15.000.000">
+                            <label for="exampleInputEmail1">Giá sản phẩm (đ)</label>
+                             <input type="number" name="pro_price" value="{{  old('pro_price', isset($product->pro_price) ? $product->pro_price : 0) }}" class="form-control" data-type="currency" placeholder="15.000.000">
                              @if ($errors->first('pro_price'))
                                 <span class="text-danger">{{ $errors->first('pro_price') }}</span>
                             @endif
@@ -40,8 +44,20 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Giảm giá</label>
+                            <label for="exampleInputEmail1">Giảm giá (%)</label>
                              <input type="number" name="pro_sale" value="{{ old('pro_sale', isset($product->pro_sale) ? $product->pro_sale : 0) }}" class="form-control" data-type="currency" placeholder="5">
+                             @if ($errors->first('pro_sale'))
+                                <span class="text-danger">{{ $errors->first('pro_sale') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="box-body" style="padding: 0px;">
+                        <div class="form-group col-sm-12">
+                            <label for="">Số lượng</label>
+                            <input type="number"  class="form-control" name="pro_number" value="{{ $product->pro_number ?? old('pro_number',0) }}" placeholder="10">
+                            @if ($errors->first('pro_number'))
+                                <span class="text-danger">{{ $errors->first('pro_number') }}</span>
+                            @endif
                         </div>
                     </div>
                     <div class="col-sm-12">
@@ -66,7 +82,7 @@
                 </div>
 
                 <div class="form-group ">
-                    <label class="control-label">Danh mục <b class="col-red">(*)</b></label>
+                    <label class="control-label">Danh mục</label>
                     <select name="pro_category_id" class="form-control ">
                         <option value="">__Click__</option>
                         @foreach($categories as $category)
@@ -148,21 +164,6 @@
                 {{--</div>--}}
             {{--</div>--}}
             {{--<hr>--}}
-            <div class="box-body" style="padding: 0px;">
-                <div class="form-group col-sm-6">
-                    <label for="exampleInputEmail1">Xuất sứ</label>
-                    <select name="pro_country" class="form-control ">
-                        <option value="0">__Click__</option>
-                        @foreach($producer as $key => $item)
-                            <option value="{{ $item->id }}" {{ ($product->pro_country ?? '' ) == $item->id ? "selected='selected'" : "" }}>{{ $item->pdr_name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-sm-6">
-                    <label for="">Số lượng</label>
-                    <input type="number"  class="form-control" name="pro_number" value="{{ $product->pro_number ?? old('pro_number',0) }}" placeholder="10">
-                </div>
-            </div>
         </div>
         <div class="box box-warning">
             <div class="box-header with-border">

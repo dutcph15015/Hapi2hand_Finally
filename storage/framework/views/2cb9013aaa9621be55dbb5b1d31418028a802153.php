@@ -27,10 +27,6 @@
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
-        <div class="item dashboards_btn">
-            <a href="javascript:;void(0)" title="Gửi đánh giá"
-               class="btn btn-success <?php echo e(\Auth::id() ? 'js-review' : 'js-show-login'); ?>">Gửi đánh giá</a>
-        </div>
     </div>
     <?php if(\Request::route()->getName() == 'get.product.rating_list'): ?>
         <?php echo $__env->make('frontend.pages.product_detail.include._inc_filter', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

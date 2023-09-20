@@ -7,6 +7,7 @@
         <div class="left">
             <div class="list">
                 <div class="title">THÔNG TIN GIỎ HÀNG</div>
+                @if (sizeof($shopping) > 0)
                 <div class="list__content">
                     <table class="table">
                         <thead>
@@ -63,7 +64,7 @@
                                                 <span class="js-increase">+</span>
                                                 <span class="js-reduction">-</span>
                                             </p>
-                                            <a href="{{  route('get.shopping.delete', $key) }}" class="js-delete-item btn-action-delete"><i class="la la-trash"></i></a>
+                                            <a href="{{  route('get.shopping.delete', $key) }}" class="js-delete-item btn-action-delete"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                     <td>
@@ -75,6 +76,12 @@
                     </table>
                     <p style="float: right;margin-top: 20px;" class="total_cart">Tổng tiền : <b id="sub-total">{{ \Cart::subtotal(0) }} đ</b></p>
                 </div>
+                @else
+                    <div style="text-align: center;margin-bottom: 20px">Bạn chưa có sản phẩm nào</div>
+                    <div style="text-align: center">
+                        <div class="btn btn-purple"><a href="{{  route('get.product.list') }}" style="color: #fff">Tiếp tục mua hàng</a></div>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="right">
@@ -107,27 +114,30 @@
                             <label for="note">Ghi chú thêm</label>
                             <textarea name="tst_note" id="note" cols="3" style="min-height: 100px;" rows="2" class="form-control"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="note">Áp dụng mã giảm giá</label>
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <input type="text" value="" class="form-control discount_code" placeholder="Mã giảm giá" style="width: 60%; float: left;">
-                                </div>
-                                <div class="col-md-4">
-                                    <button class="btn btn-purple btn-cart-discount" type="button" style="margin-left: 15px">
-                                        <span class="">Áp dụng</span>
-                                    </button>
+                        @if (sizeof($shopping) > 0)
+                            <div class="form-group">
+                                <label for="note">Áp dụng mã giảm giá</label>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <input type="text" value="" class="form-control discount_code" placeholder="Mã giảm giá" style="width: 60%; float: left;">
+                                    </div>
+                                    
+                                        <div class="col-md-4">
+                                            <button class="btn btn-purple btn-cart-discount" type="button" style="margin-left: 15px">
+                                                <span class="">Áp dụng</span>
+                                            </button>
+                                        </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="btn-buy">
-                            <button class="buy1 btn btn-purple {{ \Auth::id() ? '' : 'js-show-login' }}" type="submit">
-                                Thanh toán khi nhận hàng
-                            </button>
-                            <button class="btn btn-purple {{ \Auth::id() ? '' : 'js-show-login' }}" name="payment" value="2" type="submit">
-                                <span class="">Thanh toán online</span>
-                            </button>
-                        </div>
+                            <div class="btn-buy">
+                                <button class="buy1 btn btn-purple {{ \Auth::id() ? '' : 'js-show-login' }}" type="submit">
+                                    Thanh toán khi nhận hàng
+                                </button>
+                                <button class="btn btn-purple {{ \Auth::id() ? '' : 'js-show-login' }}" name="payment" value="2" type="submit">
+                                    <span class="">Thanh toán online</span>
+                                </button>
+                            </div>
+                        @endif
                     </form>
                 </div>
             </div>

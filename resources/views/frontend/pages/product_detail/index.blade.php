@@ -110,11 +110,19 @@
                             </div> -->
                             <div style="clear: both;"></div>
                             <div class="btn-cart" style="margin-top: 10px;">
-                                <a href="{{ route('get.shopping.add', $product->id) }}" title=""
-                                   class="muangay" id="buy-now-btn">
-                                    <span>Mua ngay</span>
-                                    <span>Hotline: 0559518488</span>
-                                </a>
+                                @if ($product->pro_number > 0 )
+                                    <a href="{{ route('get.shopping.add', $product->id) }}" title=""
+                                    class="muangay" id="buy-now-btn">
+                                        <span>Mua ngay</span>
+                                        <span>Hotline: 0559518488</span>
+                                    </a>
+                                @else
+                                    <a title=""
+                                    style="background-color: #fe0000;color: #fff" id="buy-now-btn">
+                                        <span>Hết hàng</span>
+                                        <span>Hotline: 0559518488</span>
+                                    </a>
+                                @endif
                                 <a href="{{ route('ajax_get.user.add_favourite', $product->id) }}"
                                    title="Thêm sản phẩm yêu thích"
                                    class="muatragop  {{ !\Auth::id() ? 'js-show-login' : 'js-add-favourite' }}" id="buy-now-btn">
@@ -135,10 +143,6 @@
                                                 "[N\A]"
                                             @endif
                                         </h3>
-                                    </div>
-                                    <div class="item">
-                                        <p class="text1">Xuất sứ:</p>
-                                        <h3 class="text2">{{ isset($product->producer) && !empty($product->producer) ? $product->producer->pdr_name : ''  }}</h3>
                                     </div>
                                 </div>
                             </div>
