@@ -40,12 +40,12 @@
 
                                             <?php endif; ?>
                                         </p>
-                                        <p style="font-size: 13px;font-weight: 600;">
+                                        <!-- <p style="font-size: 13px;font-weight: 600;">
                                             <?php if($item->options->gender): ?>
                                                 Gender : <?php echo e($item->options->gender == 1 ? 'Nam' : 'Nữ'); ?>
 
                                             <?php endif; ?>
-                                        </p>
+                                        </p> -->
                                     </td>
 
                                     <td>
@@ -60,7 +60,7 @@
                                     </td>
                                     <td>
                                         <div class="qty_number">
-                                            <input type="number"  min="1" class="input_quantity" name="quantity_14692" value="<?php echo e($item->qty); ?>" id="">
+                                            <input disabled type="number"  min="1" class="input_quantity" name="quantity_14692" value="<?php echo e($item->qty); ?>" id="">
                                             <p data-price="<?php echo e($item->price); ?>" data-url="<?php echo e(route('ajax_get.shopping.update', $key)); ?>" data-id-product="<?php echo e($item->id); ?>">
                                                 <span class="js-increase">+</span>
                                                 <span class="js-reduction">-</span>

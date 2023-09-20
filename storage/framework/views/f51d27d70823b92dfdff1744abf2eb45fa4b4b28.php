@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('content'); ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -25,7 +26,6 @@
                                     <th>Tên danh mục</th>
                                     <th>Ảnh</th>
                                     <th>Trạng thái</th>
-                                    <th>Hiển thị</th>
                                     <th>Ngày tạo</th>
                                     <th>Hành động</th>
                                 </tr>
@@ -45,17 +45,9 @@
                                                     <a href="<?php echo e(route('admin.category.active', $category->id)); ?>" class="label label-default">Ẩn</a>
                                                 <?php endif; ?>
                                             </td>
-                                            <td>
-                                                <?php if($category->c_hot == 1): ?>
-                                                    <a href="<?php echo e(route('admin.category.hot', $category->id)); ?>" class="label label-info">Hiển thị</a>
-                                                <?php else: ?>
-                                                    <a href="<?php echo e(route('admin.category.hot', $category->id)); ?>" class="label label-default">Ẩn</a>
-                                                <?php endif; ?>
-                                            </td>
                                             <td><?php echo e($category->created_at); ?></td>
                                             <td>
                                                 <a href="<?php echo e(route('admin.category.update', $category->id)); ?>" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-                                                <a href="<?php echo e(route('admin.category.delete', $category->id)); ?>" class="btn btn-xs btn-danger js-delete-confirm"><i class="fa fa-trash"></i> Delete</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

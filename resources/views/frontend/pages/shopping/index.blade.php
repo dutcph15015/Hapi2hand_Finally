@@ -39,11 +39,11 @@
                                                 Color : {{ $item->options->color }}
                                             @endif
                                         </p>
-                                        <p style="font-size: 13px;font-weight: 600;">
+                                        <!-- <p style="font-size: 13px;font-weight: 600;">
                                             @if ($item->options->gender)
                                                 Gender : {{ $item->options->gender == 1 ? 'Nam' : 'Nữ' }}
                                             @endif
-                                        </p>
+                                        </p> -->
                                     </td>
 
                                     <td>
@@ -58,7 +58,7 @@
                                     </td>
                                     <td>
                                         <div class="qty_number">
-                                            <input type="number"  min="1" class="input_quantity" name="quantity_14692" value="{{  $item->qty }}" id="">
+                                            <input disabled type="number"  min="1" class="input_quantity" name="quantity_14692" value="{{  $item->qty }}" id="">
                                             <p data-price="{{ $item->price }}" data-url="{{  route('ajax_get.shopping.update', $key) }}" data-id-product="{{  $item->id }}">
                                                 <span class="js-increase">+</span>
                                                 <span class="js-reduction">-</span>
